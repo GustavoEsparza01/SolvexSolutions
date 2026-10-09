@@ -345,6 +345,78 @@
 </section>
 
 <!-- =====================
+     MENÚS NFC (producto)
+===================== -->
+<section id="menu-nfc" data-tone="alt">
+  <div class="container menu-layout">
+
+    <div class="nfc-copy">
+      <div class="section-label reveal">Nuevo producto</div>
+      <h2 class="nfc-title reveal">Tu menú, a un toque<br> desde cada mesa</h2>
+      <p class="nfc-lead reveal">Placas NFC para mesas, barra o mostrador. Tus clientes acercan su celular y abren tu menú digital al instante, sin códigos que escanear ni cartas que reimprimir cada vez que cambias un precio.</p>
+
+      <ul class="nfc-features reveal">
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="5"/><rect x="14" y="7" width="8" height="10" rx="1.5"/></svg></span>
+          <span><strong>Redonda o cuadrada</strong>Elige el formato que va con tu local. La redonda mide 10 cm.</span>
+        </li>
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 20 4M14 4h6v6"/><path d="M4 12v8h8"/></svg></span>
+          <span><strong>Se pega en segundos</strong>Adhesivo 3M en la parte trasera, sin tornillos ni perforaciones.</span>
+        </li>
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3z"/></svg></span>
+          <span><strong>PVC resistente</strong>Hecha para el uso diario en mesas y barra.</span>
+        </li>
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>Lista para usar</strong>Te la entregamos configurada con el enlace de tu menú.</span>
+        </li>
+      </ul>
+
+      <div class="nfc-buy reveal">
+        <!-- TODO: Poner el precio real de los menús NFC -->
+        <div class="nfc-tiers-head">
+          <span class="price-from">Precio por placa</span>
+          <span class="nfc-checks"><span class="nfc-config">Redonda o cuadrada</span></span>
+        </div>
+        <div class="menu-price"><span class="price-from">Desde</span><span class="price-amount">$[PRECIO] <span class="price-cur">MXN</span></span></div>
+        <div class="nfc-actions">
+          <a class="btn-primary" href="https://wa.me/527831054451?text=Hola%20Nubo%20Studio%2C%20me%20interesan%20los%20men%C3%BAs%20NFC%20para%20mi%20negocio" target="_blank" rel="noopener">Pedir mis placas
+            <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn-secondary" href="#contacto" data-servicio="Menú NFC para mesas">Cotizar para mi negocio</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto sobre un panel claro (las placas son negras): fotos recortadas al borde del producto -->
+    <div class="menu-visual reveal">
+      <div class="menu-stage">
+        <div class="menu-waves" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="menu-round">
+          <img src="img/menu-nfc-redondo.png" width="691" height="565" loading="lazy" decoding="async"
+               alt="Placa NFC redonda negra de 10 cm con el texto Tap to view our menu y el ícono de un celular tocando la placa.">
+        </div>
+        <div class="menu-square">
+          <img src="img/menu-nfc-cuadrado.png" width="311" height="307" loading="lazy" decoding="async"
+               alt="Placa NFC cuadrada negra con el mismo diseño de menú.">
+        </div>
+      </div>
+      <div class="nfc-chip menu-chip--tap" aria-hidden="true">
+        <span class="nfc-chip-icon"><svg viewBox="0 0 24 24"><path d="M7 2v20M4 2v6a3 3 0 0 0 6 0V2M17 2c-1.7 0-3 2.2-3 5s1.3 4 3 4v11"/></svg></span>
+        <span><strong>Toca y mira el menú</strong><small>Desde cualquier mesa</small></span>
+      </div>
+      <div class="nfc-chip menu-chip--glue" aria-hidden="true">
+        <span class="nfc-chip-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span><strong>Adhesivo 3M</strong><small>Se pega en segundos</small></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =====================
      PROCESO
 ===================== -->
 <section id="proceso" data-tone="base">
@@ -656,6 +728,7 @@
             <option>Sistema de inventario</option>
             <option>Sistema de agenda y citas</option>
             <option>Tarjeta NFC para reseñas de Google</option>
+            <option>Menú NFC para mesas</option>
             <option>Otro / No sé aún</option>
           </select>
         </div>

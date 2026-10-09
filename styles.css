@@ -1205,6 +1205,80 @@ body[data-tone="nfc"] { background-color: #0E1222; }
 }
 
 /* =====================
+   MENÚS NFC (producto) — reutiliza los estilos de texto/beneficios/compra de las tarjetas NFC
+===================== */
+#menu-nfc { background: var(--bg2); padding: 7rem 4rem; }
+.menu-layout {
+  display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 4rem; align-items: center;
+}
+.menu-price { display: flex; flex-direction: column; }
+.menu-price .price-amount { margin: 0.2rem 0 0; font-size: 2.3rem; }
+
+/* Panel claro tipo foto de estudio: las placas son negras y sobre el fondo oscuro se perderían */
+.menu-visual { position: relative; }
+.menu-stage {
+  position: relative; aspect-ratio: 1 / 0.92; border-radius: 28px;
+  background: radial-gradient(120% 100% at 35% 30%, #FBF8F3 0%, #ECE6DB 70%, #E2DBCE 100%);
+  box-shadow: 0 50px 90px -45px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+/* Disco: medido en el PNG (691×565): círculo de x 72–520, y 30–478 */
+.menu-round {
+  position: absolute; left: 7%; top: 8%; width: 60%; aspect-ratio: 1;
+  border-radius: 50%; overflow: hidden;
+  box-shadow: 0 30px 45px -22px rgba(30,25,15,0.55), 0 6px 14px -6px rgba(30,25,15,0.35);
+  transform: rotate(-8deg); transition: transform 0.7s var(--ease);
+  animation: nfcFloat 6.5s ease-in-out infinite;
+}
+.menu-round img { display: block; width: 154.24%; max-width: none; height: auto; margin: -6.70% 0 0 -16.07%; }
+/* Placa cuadrada: medida en el PNG (311×307): x 14–293, y 18–294 */
+.menu-square {
+  position: absolute; right: 7%; bottom: 9%; width: 40%; aspect-ratio: 280 / 277;
+  border-radius: 5%; overflow: hidden;
+  box-shadow: 0 26px 40px -20px rgba(30,25,15,0.55), 0 6px 12px -6px rgba(30,25,15,0.35);
+  transform: rotate(9deg); transition: transform 0.7s var(--ease);
+  animation: nfcFloat 7s ease-in-out -2.5s infinite;
+}
+.menu-square img { display: block; width: 111.07%; max-width: none; height: auto; margin: -6.43% 0 0 -5%; }
+.menu-visual:hover .menu-round { transform: rotate(-3deg) scale(1.02); }
+.menu-visual:hover .menu-square { transform: rotate(4deg) scale(1.02); }
+/* Ondas NFC desde el disco */
+.menu-waves {
+  position: absolute; left: 7%; top: 8%; width: 60%; aspect-ratio: 1;
+  display: grid; place-items: center; pointer-events: none;
+}
+.menu-waves i {
+  grid-area: 1 / 1; width: 100%; aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid rgba(var(--accent-rgb),0.55);
+  animation: nfcWave 3.6s var(--ease) infinite;
+}
+.menu-waves i:nth-child(2) { animation-delay: 1.2s; }
+.menu-waves i:nth-child(3) { animation-delay: 2.4s; }
+/* Avisos: aparecen al revelar la sección */
+.menu-visual .nfc-chip { z-index: 3; }
+.menu-chip--tap { top: -4%; left: -5%; }
+.menu-chip--glue { bottom: -4%; left: 10%; }
+.menu-visual.visible .nfc-chip { opacity: 1; transform: none; }
+.menu-visual.visible .menu-chip--tap { transition-delay: 0.5s; }
+.menu-visual.visible .menu-chip--glue { transition-delay: 0.75s; }
+
+@media (max-width: 1024px) {
+  #menu-nfc { padding: 5rem 2rem; }
+  .menu-layout { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  .menu-visual { order: -1; max-width: 560px; width: 100%; justify-self: center; }
+}
+@media (max-width: 768px) {
+  #menu-nfc { padding: 4.5rem 1.5rem; }
+  .menu-chip--tap { left: 0; }
+}
+@media (max-width: 480px) {
+  #menu-nfc { padding: 4rem 1rem; }
+  .menu-visual { margin: 1rem 0; }
+  .menu-chip--tap { top: -6%; left: 2%; }
+  .menu-chip--glue { bottom: -6%; left: 4%; }
+}
+
+/* =====================
    TRANSICIONES ENTRE SECCIONES
 ===================== */
 /* 1. Fondo continuo: con JS las secciones son transparentes y el body cambia de tono
@@ -1213,7 +1287,7 @@ body { transition: background-color 1s var(--ease); }
 body[data-tone="alt"]  { background-color: var(--bg2); }
 body[data-tone="blue"] { background-color: var(--tone-blue); }
 body[data-tone="teal"] { background-color: var(--tone-teal); }
-.js :is(#servicios, #resenas-nfc, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
+.js :is(#servicios, #resenas-nfc, #menu-nfc, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
 
 /* 2. Títulos de sección: se descubren de abajo hacia arriba como una cortina.
       Máscara (no clip-path): Chrome cuenta el clip-path del propio elemento en
