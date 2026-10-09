@@ -305,8 +305,29 @@
       </ul>
 
       <div class="nfc-buy reveal">
-        <!-- TODO: Poner el precio real -->
-        <div class="nfc-price"><span class="price-from">Desde</span><span class="price-amount">$[PRECIO] <span class="price-cur">MXN</span></span></div>
+        <!-- Precios por volumen. Ahorro calculado contra $480 c/u. -->
+        <div class="nfc-tiers-head">
+          <span class="price-from">Precio por tarjeta</span>
+          <span class="nfc-config">Ya configurada con tu negocio</span>
+        </div>
+        <ul class="nfc-tiers">
+          <li class="nfc-tier">
+            <span class="nfc-tier-qty">1 tarjeta</span>
+            <span class="nfc-tier-price">$480 <span class="price-cur">MXN</span></span>
+            <span class="nfc-tier-note">Precio de menudeo</span>
+          </li>
+          <li class="nfc-tier">
+            <span class="nfc-tier-qty">2 tarjetas</span>
+            <span class="nfc-tier-price">$850 <span class="price-cur">MXN</span></span>
+            <span class="nfc-tier-note">$425 c/u · ahorras $110</span>
+          </li>
+          <li class="nfc-tier nfc-tier--best">
+            <span class="nfc-tier-badge">Mejor precio</span>
+            <span class="nfc-tier-qty">3 o más</span>
+            <span class="nfc-tier-price">$400 <span class="price-cur">c/u</span></span>
+            <span class="nfc-tier-note">Ahorras $80 por tarjeta</span>
+          </li>
+        </ul>
         <div class="nfc-actions">
           <!-- TODO: Cambia el número 529931234567 por tu número real -->
           <a class="btn-primary" href="https://wa.me/529931234567?text=Hola%20Nubo%20Studio%2C%20me%20interesan%20las%20tarjetas%20NFC%20para%20rese%C3%B1as%20de%20Google" target="_blank" rel="noopener">Pedir mi tarjeta

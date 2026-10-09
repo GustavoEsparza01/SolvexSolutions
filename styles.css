@@ -1141,12 +1141,40 @@ body[data-tone="nfc"] { background-color: #0E1222; }
 }
 .nfc-f-icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .nfc-buy {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem;
+  display: flex; flex-direction: column; gap: 1.25rem;
   padding: 1.5rem 1.75rem; border-radius: 18px;
   background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.1);
 }
-.nfc-price { display: flex; flex-direction: column; }
-.nfc-price .price-amount { margin: 0.2rem 0 0; font-size: 2.3rem; }
+.nfc-tiers-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 1rem; }
+.nfc-config {
+  display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--accent);
+}
+.nfc-config::before {
+  content: ''; width: 9px; height: 5px; margin-bottom: 0.2em;
+  border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg);
+}
+.nfc-tiers { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.nfc-tier {
+  position: relative; display: flex; flex-direction: column; gap: 0.3rem;
+  padding: 1.1rem 1rem; border-radius: 14px;
+  background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.1);
+  transition: border-color 0.3s, transform 0.35s var(--ease);
+}
+.nfc-tier:hover { border-color: rgba(255,255,255,0.22); transform: translateY(-2px); }
+.nfc-tier--best { background: var(--accent-soft); border-color: var(--accent-line); }
+.nfc-tier--best:hover { border-color: var(--accent); }
+.nfc-tier-badge {
+  position: absolute; top: -0.7rem; left: 1rem;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 0.25rem 0.6rem; border-radius: 999px; background: var(--accent); color: var(--accent-ink);
+}
+.nfc-tier-qty { font-size: 0.85rem; color: var(--muted-2); font-weight: 500; }
+.nfc-tier-price {
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+}
+.nfc-tier--best .nfc-tier-price { color: var(--accent); }
+.nfc-tier-note { font-size: 0.78rem; color: var(--muted-2); line-height: 1.35; }
 .nfc-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .nfc-legal { margin-top: 1rem; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
 
@@ -1160,6 +1188,10 @@ body[data-tone="nfc"] { background-color: #0E1222; }
   .nfc-title br { display: none; }
   .nfc-features { grid-template-columns: minmax(0, 1fr); }
   .nfc-actions, .nfc-actions a { width: 100%; }
+  .nfc-tiers { grid-template-columns: minmax(0, 1fr); }
+  .nfc-tier { flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 0.75rem; padding: 1rem 1.1rem; }
+  .nfc-tier-price { margin-left: auto; }
+  .nfc-tier-note { width: 100%; }
   .nfc-photo { transform: rotate(-2deg); }
 }
 @media (max-width: 480px) {
