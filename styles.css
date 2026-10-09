@@ -1212,8 +1212,6 @@ body[data-tone="nfc"] { background-color: #0E1222; }
   display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 4rem; align-items: center;
 }
-.menu-price { display: flex; flex-direction: column; }
-.menu-price .price-amount { margin: 0.2rem 0 0; font-size: 2.3rem; }
 
 /* Panel claro tipo foto de estudio: las placas son negras y sobre el fondo oscuro se perderían */
 .menu-visual { position: relative; }
