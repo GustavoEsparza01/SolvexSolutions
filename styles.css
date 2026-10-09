@@ -1146,6 +1146,7 @@ body[data-tone="nfc"] { background-color: #0E1222; }
   background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.1);
 }
 .nfc-tiers-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem 1rem; }
+.nfc-checks { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; }
 .nfc-config {
   display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--accent);
 }
