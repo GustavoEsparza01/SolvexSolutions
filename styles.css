@@ -1067,6 +1067,111 @@ footer { position: relative; overflow: hidden; background: var(--bg); border-top
 
 
 /* =====================
+   RESEÑAS NFC (producto)
+===================== */
+#resenas-nfc { background: #0E1222; padding: 7rem 4rem; }
+body[data-tone="nfc"] { background-color: #0E1222; }
+.nfc-layout {
+  display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 4rem; align-items: center;
+}
+
+/* Producto */
+.nfc-visual { position: relative; display: grid; place-items: center; padding: 3rem 2rem; }
+.nfc-waves { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.nfc-waves i {
+  grid-area: 1 / 1; width: 78%; aspect-ratio: 1; border-radius: 50%;
+  border: 1.5px solid rgba(var(--accent2-rgb),0.45);
+  animation: nfcWave 3.6s var(--ease) infinite;
+}
+.nfc-waves i:nth-child(2) { animation-delay: 1.2s; }
+.nfc-waves i:nth-child(3) { animation-delay: 2.4s; }
+@keyframes nfcWave { 0% { transform: scale(0.55); opacity: 0; } 25% { opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
+.nfc-visual::before {
+  content: ''; position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent2-rgb),0.35), transparent 65%);
+  filter: blur(20px); pointer-events: none;
+}
+
+/* Foto recortada al borde de la tarjeta: medida en el PNG (590×577), tarjeta en x 64–519, y 49–528 */
+.nfc-photo {
+  position: relative; width: min(100%, 440px); aspect-ratio: 456 / 480;
+  overflow: hidden; border-radius: 6.2% / 5.9%;
+  box-shadow: 0 50px 90px -35px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.08);
+  transform: perspective(1200px) rotateY(-10deg) rotateX(4deg) rotate(-2deg);
+  transition: transform 0.7s var(--ease);
+  animation: nfcFloat 6s ease-in-out infinite;
+}
+.nfc-photo img { display: block; width: 129.39%; height: auto; max-width: none; margin: -10.746% 0 0 -14.035%; }
+.nfc-visual:hover .nfc-photo { transform: perspective(1200px) rotateY(-3deg) rotateX(1deg) rotate(0deg); }
+@keyframes nfcFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+
+/* Avisos flotantes */
+.nfc-chip {
+  position: absolute; z-index: 2; display: flex; align-items: center; gap: 0.7rem;
+  background: rgba(var(--bg3-rgb),0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 0.7rem 1rem;
+  box-shadow: 0 20px 40px -16px rgba(0,0,0,0.75);
+  opacity: 0; transform: translateY(14px) scale(0.95);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.nfc-visual.visible .nfc-chip { opacity: 1; transform: none; }
+.nfc-visual.visible .nfc-chip--stars { transition-delay: 0.5s; }
+.nfc-visual.visible .nfc-chip--tap { transition-delay: 0.75s; }
+.nfc-chip strong { display: block; font-size: 0.85rem; font-weight: 600; }
+.nfc-chip small { display: block; font-size: 0.75rem; color: var(--muted-2); }
+.nfc-chip--stars { top: -1%; right: 4%; }  /* arriba de la tarjeta, sin tapar su texto */
+.nfc-chip--tap { bottom: -1%; left: 4%; }
+.nfc-stars { color: #FBBC05; font-size: 1rem; letter-spacing: 0.08em; }
+.nfc-chip-icon {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  color: var(--accent); background: var(--accent-soft);
+}
+.nfc-chip-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* Texto */
+.nfc-title { font-size: clamp(2rem, 3.6vw, 3.15rem); letter-spacing: -0.035em; line-height: 1.04; margin-bottom: 1.25rem; }
+.nfc-lead { color: var(--muted-2); font-size: 1.1rem; line-height: 1.7; max-width: 52ch; }
+.nfc-features { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 1.75rem; margin: 2.25rem 0; }
+.nfc-features li { display: flex; gap: 0.85rem; align-items: flex-start; font-size: 0.92rem; color: var(--muted-2); line-height: 1.5; }
+.nfc-features strong { display: block; color: var(--text); font-size: 1rem; font-weight: 600; margin-bottom: 0.15rem; }
+.nfc-f-icon {
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(var(--accent-rgb),0.2);
+}
+.nfc-f-icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.nfc-buy {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem;
+  padding: 1.5rem 1.75rem; border-radius: 18px;
+  background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.1);
+}
+.nfc-price { display: flex; flex-direction: column; }
+.nfc-price .price-amount { margin: 0.2rem 0 0; font-size: 2.3rem; }
+.nfc-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.nfc-legal { margin-top: 1rem; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+@media (max-width: 1024px) {
+  #resenas-nfc { padding: 5rem 2rem; }
+  .nfc-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .nfc-visual { max-width: 560px; width: 100%; justify-self: center; }
+}
+@media (max-width: 768px) {
+  #resenas-nfc { padding: 4.5rem 1.5rem; }
+  .nfc-title br { display: none; }
+  .nfc-features { grid-template-columns: minmax(0, 1fr); }
+  .nfc-actions, .nfc-actions a { width: 100%; }
+  .nfc-photo { transform: rotate(-2deg); }
+}
+@media (max-width: 480px) {
+  #resenas-nfc { padding: 4rem 1rem; }
+  .nfc-visual { padding: 2.5rem 0.5rem; }
+  .nfc-chip { padding: 0.55rem 0.75rem; }
+  .nfc-chip--stars { top: -5%; right: 2%; }
+  .nfc-chip--tap { bottom: -5%; left: 2%; }
+  .nfc-buy { padding: 1.25rem; }
+}
+
+/* =====================
    TRANSICIONES ENTRE SECCIONES
 ===================== */
 /* 1. Fondo continuo: con JS las secciones son transparentes y el body cambia de tono
@@ -1075,7 +1180,7 @@ body { transition: background-color 1s var(--ease); }
 body[data-tone="alt"]  { background-color: var(--bg2); }
 body[data-tone="blue"] { background-color: var(--tone-blue); }
 body[data-tone="teal"] { background-color: var(--tone-teal); }
-.js :is(#servicios, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
+.js :is(#servicios, #resenas-nfc, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
 
 /* 2. Títulos de sección: se descubren de abajo hacia arriba como una cortina.
       Máscara (no clip-path): Chrome cuenta el clip-path del propio elemento en

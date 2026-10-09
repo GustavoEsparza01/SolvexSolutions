@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const selectServicio = document.getElementById('servicio');
-  document.querySelectorAll('.service-cta[data-servicio]').forEach(link => {
+  document.querySelectorAll('a[data-servicio]').forEach(link => {
     link.addEventListener('click', () => {
       if (selectServicio) selectServicio.value = link.dataset.servicio;
     });
