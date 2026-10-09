@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function actualizarNav() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
+    // Progreso de lectura (barra en el borde del nav)
+    const recorrido = document.documentElement.scrollHeight - window.innerHeight;
+    nav.style.setProperty('--page', recorrido > 0 ? (window.scrollY / recorrido).toFixed(4) : 0);
     let current = '';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
@@ -289,6 +292,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!tickHero) { tickHero = true; requestAnimationFrame(salidaHero); }
     }, { passive: true });
     salidaHero();
+  }
+
+  // =====================
+  // 2g. TONO DE FONDO — el body toma el tono de la sección que cruza el centro de la pantalla
+  // =====================
+  const seccionesConTono = document.querySelectorAll('section[data-tone]');
+  if (seccionesConTono.length) {
+    document.body.dataset.tone = 'base';
+    const tonoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) document.body.dataset.tone = entry.target.dataset.tone;
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+    seccionesConTono.forEach(s => tonoObserver.observe(s));
   }
 
   // Año del footer

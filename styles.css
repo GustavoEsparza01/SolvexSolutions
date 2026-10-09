@@ -423,6 +423,7 @@ h2 {
 }
 @media (max-width: 900px) {
   .services-head { grid-template-columns: minmax(0, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+  .services-head h2 br { display: none; }
 }
 @media (max-width: 768px) {
   .service-row { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 2.25rem 0; }
@@ -1023,6 +1024,50 @@ footer { position: relative; overflow: hidden; background: var(--bg); border-top
 
 
   .mobile-menu { padding: 1.25rem 1rem 1.75rem; }
+}
+
+
+/* =====================
+   TRANSICIONES ENTRE SECCIONES
+===================== */
+/* 1. Fondo continuo: con JS las secciones son transparentes y el body cambia de tono
+      según la sección en pantalla (data-tone → body[data-tone], main.js) */
+body { transition: background-color 1s var(--ease); }
+body[data-tone="alt"]  { background-color: var(--bg2); }
+body[data-tone="blue"] { background-color: #0C1526; }
+body[data-tone="teal"] { background-color: #0A181B; }
+.js :is(#servicios, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
+
+/* 2. Títulos de sección: se descubren de abajo hacia arriba como una cortina.
+      Máscara (no clip-path): Chrome cuenta el clip-path del propio elemento en
+      IntersectionObserver y un título recortado al 100% nunca dispararía su .visible */
+.js section h2.reveal {
+  opacity: 1; transform: translateY(0.35em);
+  padding-bottom: 0.15em; /* la máscara no corta los descendentes */
+  -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 55%);
+          mask-image: linear-gradient(to top, #000 45%, transparent 55%);
+  -webkit-mask-size: 100% 220%; mask-size: 100% 220%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: 0 0; mask-position: 0 0;
+  transition: -webkit-mask-position 1.2s var(--ease), mask-position 1.2s var(--ease), transform 1.2s var(--ease);
+}
+.js section h2.reveal.visible { transform: none; -webkit-mask-position: 0 100%; mask-position: 0 100%; }
+
+/* 3. Etiquetas: una línea se dibuja antes del texto */
+.section-label { display: flex; align-items: center; gap: 0.75rem; }
+.section-label::before {
+  content: ''; height: 1px; width: 28px; background: currentColor; flex-shrink: 0;
+  transform: scaleX(1); transform-origin: left;
+}
+.js .section-label.reveal::before { transform: scaleX(0); transition: transform 0.8s var(--ease) 0.25s; }
+.js .section-label.reveal.visible::before { transform: scaleX(1); }
+
+/* 4. Progreso de lectura en el borde del nav (--page la pone main.js) */
+nav::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(var(--page, 0)); transform-origin: left;
+  pointer-events: none;
 }
 
 /* =====================
