@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Ícono Nubo Studio: una n entre signos de código (variante de 48 px del diseño) -->
+  <rect width="100" height="100" rx="23" fill="#14141A"/>
+  <g transform="translate(9 9) scale(0.82)" fill="none" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="24,30 8,50 24,70" stroke="#F6F2EA"/>
+    <path d="M37 70 V52 A13 13 0 0 1 63 52 V70" stroke="#F6F2EA"/>
+    <polyline points="76,30 92,50 76,70" stroke="#1FE0C0"/>
+  </g>
+</svg>

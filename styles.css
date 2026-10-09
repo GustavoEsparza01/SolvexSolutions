@@ -1,5 +1,5 @@
 /* =====================
-   SOLVEXSOLUTIONS - STYLES
+   NUBO STUDIO - STYLES
    styles.css
 ===================== */
 
@@ -56,8 +56,28 @@ nav {
 }
 nav.scrolled { background: rgba(var(--bg-rgb),0.92); border-bottom-color: var(--border); }
 @media (max-width: 1200px) { nav { padding-left: 2rem; padding-right: 2rem; } .nav-links { gap: 1.6rem; } }
-.logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; text-decoration: none; color: var(--text); }
-.logo span { color: var(--accent); }
+/* LOGO — Nubo Studio: ‹NUBO› + STUDIO. Medidas del diseño de referencia relativas al font-size
+   (chevrón 26×48 y gap 8 sobre texto de 64px → .41em × .75em y .125em; STUDIO 12px → .1875em) */
+.logo {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.32em;
+  font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; line-height: 1;
+  color: var(--text); text-decoration: none;
+}
+.logo-mark { display: inline-flex; align-items: center; gap: 0.125em; font-weight: 700; letter-spacing: -0.03em; }
+.logo-chev {
+  width: 0.41em; height: 0.75em; flex-shrink: 0; overflow: visible;
+  fill: none; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform 0.4s var(--ease);
+}
+.logo-chev--open { stroke: currentColor; }
+.logo-chev--close { stroke: var(--accent); }
+.logo-sub {
+  font-size: max(0.1875em, 0.56rem); font-weight: 500; letter-spacing: 0.5em; padding-left: 0.5em;
+  color: var(--muted-2);
+}
+/* Microinteracción: los signos se separan un poco */
+a.logo:hover .logo-chev--open { transform: translateX(-0.1em); }
+a.logo:hover .logo-chev--close { transform: translateX(0.1em); }
 .nav-links { list-style: none; display: flex; gap: 2.25rem; }
 .nav-links a {
   position: relative; display: inline-block; padding: 0.35rem 0; white-space: nowrap;
@@ -926,7 +946,7 @@ a.contact-item:hover .contact-arrow { transform: rotate(45deg); stroke: var(--ac
 ===================== */
 footer { position: relative; overflow: hidden; background: var(--bg); border-top: 1px solid rgba(255,255,255,0.08); padding: 3.5rem 4rem 0; }
 .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
-.footer-top .logo { font-size: 1.25rem; }
+.footer-top .logo { font-size: 1.9rem; }
 .footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
 .footer-links a {
   display: inline-block; padding: 0.5rem 0; color: var(--muted-2); text-decoration: none; font-size: 0.95rem;
@@ -939,12 +959,15 @@ footer { position: relative; overflow: hidden; background: var(--bg); border-top
   margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06);
 }
 .footer-bottom p { font-size: 0.85rem; color: var(--muted-2); }
-/* Marca gigante cortada al borde inferior (decorativa) */
+/* Marca gigante ‹NUBO› cortada al borde inferior (decorativa) */
 .footer-mark {
-  font-family: 'Syne', sans-serif; font-weight: 700; white-space: nowrap; text-align: center;
-  font-size: clamp(2.5rem, 10.8vw, 15rem); line-height: 0.8; /* ≈8.7em de ancho en Syne 700 → cabe en 100vw */ letter-spacing: -0.045em;
-  color: rgba(var(--accent-rgb),0.06); margin: 2.5rem -0.05em -0.12em; user-select: none;
+  display: flex; justify-content: center; align-items: center; gap: 0.1em;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700; white-space: nowrap;
+  font-size: clamp(4rem, 21vw, 19rem); line-height: 0.8; letter-spacing: -0.04em;
+  color: rgba(var(--accent-rgb),0.06); margin: 2.5rem 0 -0.14em; user-select: none;
 }
+.footer-mark .logo-chev { width: 0.41em; height: 0.75em; stroke: currentColor; stroke-width: 8; }
+.footer-mark .logo-chev--close { stroke: rgba(var(--accent-rgb),0.16); }
 
 /* =====================
    SCROLL ANIMATIONS
@@ -1014,7 +1037,7 @@ footer { position: relative; overflow: hidden; background: var(--bg); border-top
 ===================== */
 @media (max-width: 480px) {
   nav { padding: 0.65rem 1rem; }
-  .logo { font-size: 1.15rem; }
+  .logo { font-size: 1.3rem; }
 
   .hero { padding: 6rem 1rem 3rem; }
   .hero-badge { font-size: 0.75rem; padding: 0.35rem 0.85rem; }
@@ -1086,6 +1109,29 @@ nav::after {
   pointer-events: none;
 }
 
+
+/* =====================
+   INTRO DEL LOGO — una vez por sesión (script en <head> pone html.intro e html.intro-hold).
+   Sin JS o con movimiento reducido no aparece.
+===================== */
+.intro-screen { display: none; }
+html.intro .intro-screen {
+  display: flex; position: fixed; inset: 0; z-index: 1000;
+  align-items: center; justify-content: center; background: var(--bg);
+  animation: introOut 0.85s var(--ease) 1.6s forwards;
+}
+.intro-screen .logo { font-size: clamp(3rem, 10vw, 6.5rem); }
+.intro-screen .logo-sub { font-size: 0.1875em; }
+html.intro .intro-screen .logo-chev--open  { animation: chevIn 0.9s var(--ease) 0.15s both; --from: 1.2em; }
+html.intro .intro-screen .logo-chev--close { animation: chevIn 0.9s var(--ease) 0.15s both; --from: -1.2em; }
+html.intro .intro-screen .logo-word { animation: wordOpen 0.8s var(--ease) 0.45s both; }
+html.intro .intro-screen .logo-sub { animation: subIn 0.7s var(--ease) 0.85s both; }
+@keyframes chevIn { from { opacity: 0; transform: translateX(var(--from)); } to { opacity: 1; transform: none; } }
+@keyframes wordOpen { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(-10% -5% -10% -5%); } }
+@keyframes subIn { from { opacity: 0; letter-spacing: 0.15em; } to { opacity: 1; letter-spacing: 0.5em; } }
+@keyframes introOut { to { transform: translateY(-100%); visibility: hidden; } }
+/* Mientras dura la intro, las animaciones del hero esperan (main.js quita intro-hold) */
+html.intro-hold .hero *, html.intro-hold .hero *::before, html.intro-hold .hero *::after { animation-play-state: paused !important; }
 
 /* =====================
    ACCESIBILIDAD — foco visible

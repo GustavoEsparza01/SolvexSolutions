@@ -3,22 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SolvexSolutions — Desarrollo web a la medida para pequeños y medianos negocios en México. Páginas web, sistemas de inventario y agendas digitales.">
-  <title>SolvexSolutions — Desarrollo Web a la Medida</title>
+  <meta name="description" content="Nubo Studio — Desarrollo web a la medida para pequeños y medianos negocios en México. Páginas web, sistemas de inventario y agendas digitales.">
+  <title>Nubo Studio — Desarrollo Web a la Medida</title>
+  <meta name="theme-color" content="#0C0C10">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <!-- FUENTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
 
   <!-- ESTILOS -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Intro del logo: una vez por sesión; se omite con movimiento reducido. Va en <head> para que no parpadee el contenido. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('nubo-intro')) {
+          d.classList.add('intro', 'intro-hold');
+          sessionStorage.setItem('nubo-intro', '1');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+
+<!-- INTRO DEL LOGO (decorativa) -->
+<div class="intro-screen" aria-hidden="true">
+  <div class="logo"><span class="logo-mark" aria-hidden="true"><svg class="logo-chev logo-chev--open" viewBox="0 0 32 60"><polyline points="27,5 5,30 27,55"/></svg><span class="logo-word">NUBO</span><svg class="logo-chev logo-chev--close" viewBox="0 0 32 60"><polyline points="5,5 27,30 5,55"/></svg></span><span class="logo-sub" aria-hidden="true">STUDIO</span></div>
+</div>
 
 <!-- =====================
      NAVBAR
 ===================== -->
 <nav>
-  <a href="#inicio" class="logo">Solvex<span>Solutions</span></a>
+  <a href="#inicio" class="logo" aria-label="Nubo Studio, ir al inicio"><span class="logo-mark" aria-hidden="true"><svg class="logo-chev logo-chev--open" viewBox="0 0 32 60"><polyline points="27,5 5,30 27,55"/></svg><span class="logo-word">NUBO</span><svg class="logo-chev logo-chev--close" viewBox="0 0 32 60"><polyline points="5,5 27,30 5,55"/></svg></span><span class="logo-sub" aria-hidden="true">STUDIO</span></a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#comparacion">¿Por qué digital?</a></li>
@@ -418,20 +439,20 @@
       <div class="comp-echo" aria-hidden="true">Digital</div>
       <div class="section-label reveal">El cambio que necesitas</div>
       <h2 class="comp-title reveal">Papel vs Digital —<br> la diferencia es clara</h2>
-      <p class="section-sub reveal">Así se ve el mismo negocio antes y después de digitalizar sus procesos con SolvexSolutions.</p>
+      <p class="section-sub reveal">Así se ve el mismo negocio antes y después de digitalizar sus procesos con Nubo Studio.</p>
     </div>
 
     <!-- Interruptor antes/después. Sin JS se ocultan los botones y se muestran ambas listas. -->
     <div class="comp-switch" role="group" aria-label="Comparar el negocio antes y después">
       <span class="comp-switch-indicator" aria-hidden="true"></span>
       <button type="button" class="comp-tab" data-estado="papel" aria-pressed="true">Sin digitalizar</button>
-      <button type="button" class="comp-tab" data-estado="digital" aria-pressed="false">Con SolvexSolutions</button>
+      <button type="button" class="comp-tab" data-estado="digital" aria-pressed="false">Con Nubo Studio</button>
     </div>
 
     <div class="comp-board" id="compBoard">
       <div class="comp-board-head" aria-hidden="true">
         <span class="comp-state comp-state--papel">Sin digitalizar</span>
-        <span class="comp-state comp-state--digital">Con SolvexSolutions</span>
+        <span class="comp-state comp-state--digital">Con Nubo Studio</span>
       </div>
       <ul class="comp-list">
         <li class="comp-row" style="--i:0">
@@ -488,7 +509,7 @@
         <p class="section-sub">Cuéntanos tu proyecto. La consulta inicial es completamente gratuita y sin compromiso.</p>
 
         <!-- TODO: Cambia el número 529931234567 por tu número real (también en el botón flotante) -->
-        <a class="contact-item" href="https://wa.me/529931234567?text=Hola%20SolvexSolutions%2C%20me%20interesa%20conocer%20sus%20servicios" target="_blank" rel="noopener">
+        <a class="contact-item" href="https://wa.me/529931234567?text=Hola%20Nubo%20Studio%2C%20me%20interesa%20conocer%20sus%20servicios" target="_blank" rel="noopener">
           <span class="contact-icon">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6.29 6.29l1.46-1.46a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </span>
@@ -566,7 +587,7 @@
      WHATSAPP FLOTANTE
      TODO: Cambia el número 529931234567 por tu número real
 ===================== -->
-<a href="https://wa.me/529931234567?text=Hola%20SolvexSolutions%2C%20me%20interesa%20conocer%20sus%20servicios"
+<a href="https://wa.me/529931234567?text=Hola%20Nubo%20Studio%2C%20me%20interesa%20conocer%20sus%20servicios"
    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
@@ -580,7 +601,7 @@
 <footer>
   <div class="container">
     <div class="footer-top">
-      <a href="#inicio" class="logo">Solvex<span>Solutions</span></a>
+      <a href="#inicio" class="logo" aria-label="Nubo Studio, ir al inicio"><span class="logo-mark" aria-hidden="true"><svg class="logo-chev logo-chev--open" viewBox="0 0 32 60"><polyline points="27,5 5,30 27,55"/></svg><span class="logo-word">NUBO</span><svg class="logo-chev logo-chev--close" viewBox="0 0 32 60"><polyline points="5,5 27,30 5,55"/></svg></span><span class="logo-sub" aria-hidden="true">STUDIO</span></a>
       <ul class="footer-links">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#proceso">Proceso</a></li>
@@ -590,11 +611,11 @@
     </div>
     <div class="footer-bottom">
       <!-- El año se actualiza solo desde main.js -->
-      <p>© <span id="anio">2025</span> SolvexSolutions · Ciudad del Carmen, Campeche · México</p>
+      <p>© <span id="anio">2025</span> Nubo Studio · Ciudad del Carmen, Campeche · México</p>
       <p>Desarrollo web a la medida</p>
     </div>
   </div>
-  <div class="footer-mark" aria-hidden="true">SolvexSolutions</div>
+  <div class="footer-mark" aria-hidden="true"><svg class="logo-chev logo-chev--open" viewBox="0 0 32 60"><polyline points="27,5 5,30 27,55"/></svg><span>NUBO</span><svg class="logo-chev logo-chev--close" viewBox="0 0 32 60"><polyline points="5,5 27,30 5,55"/></svg></div>
 </footer>
 
 <!-- SCRIPTS -->

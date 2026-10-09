@@ -1,5 +1,5 @@
 /* =====================
-   SOLVEXSOLUTIONS - SCRIPTS
+   NUBO STUDIO - SCRIPTS
    main.js
    
    MÓDULOS:
@@ -326,9 +326,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  // Hero se muestra inmediatamente sin esperar scroll
-  document.querySelectorAll('.hero .reveal, .hero .reveal-left, .hero .reveal-right')
+  // Hero se muestra inmediatamente sin esperar scroll (o al terminar la intro del logo)
+  const mostrarHero = () => document.querySelectorAll('.hero .reveal, .hero .reveal-left, .hero .reveal-right')
     .forEach(el => el.classList.add('visible'));
+  if (document.documentElement.classList.contains('intro-hold')) {
+    // La intro empieza a subir a los 1.6s: el hero arranca justo debajo
+    setTimeout(() => {
+      document.documentElement.classList.remove('intro-hold');
+      mostrarHero();
+    }, 1600);
+  } else {
+    mostrarHero();
+  }
 
   // El resto espera scroll
   revealEls.forEach(el => {
