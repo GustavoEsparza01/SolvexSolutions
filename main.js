@@ -221,6 +221,76 @@ document.addEventListener('DOMContentLoaded', () => {
     compObserver.observe(compBoard);
   }
 
+  // =====================
+  // 2f. HERO CINEMÁTICO — titular por palabras, luz/3D con el cursor, salida con el scroll
+  // =====================
+  const hero = document.querySelector('.hero');
+  const heroH1 = hero && hero.querySelector('h1');
+
+  if (heroH1 && !reduceMotion) {
+    // Envuelve cada palabra en .w > .wi (máscara + palabra). Las píldoras (aria-hidden) se dejan igual.
+    const walker = document.createTreeWalker(heroH1, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => n.parentElement.closest('.pill') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
+    const nodos = [];
+    while (walker.nextNode()) nodos.push(walker.currentNode);
+    let i = 0;
+    nodos.forEach(nodo => {
+      const frag = document.createDocumentFragment();
+      nodo.textContent.split(/(\s+)/).forEach(parte => {
+        if (!parte) return;
+        if (/^\s+$/.test(parte)) { frag.appendChild(document.createTextNode(parte)); return; }
+        const w = document.createElement('span');
+        w.className = 'w';
+        const wi = document.createElement('span');
+        wi.className = 'wi';
+        wi.style.setProperty('--wi', i++);
+        wi.textContent = parte;
+        w.appendChild(wi);
+        frag.appendChild(w);
+      });
+      nodo.replaceWith(frag);
+    });
+    heroH1.classList.remove('reveal');
+    heroH1.classList.add('is-split');
+  }
+
+  if (hero && !reduceMotion) {
+    // Cursor → --mx / --my suavizados (solo con mouse; en táctil no aplica)
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, rafHero = null;
+      const seguir = () => {
+        cx += (tx - cx) * 0.08;
+        cy += (ty - cy) * 0.08;
+        hero.style.setProperty('--mx', cx.toFixed(4));
+        hero.style.setProperty('--my', cy.toFixed(4));
+        rafHero = (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) ? requestAnimationFrame(seguir) : null;
+      };
+      hero.addEventListener('pointermove', (e) => {
+        const r = hero.getBoundingClientRect();
+        tx = (e.clientX - r.left) / r.width;
+        ty = (e.clientY - r.top) / r.height;
+        if (!rafHero) rafHero = requestAnimationFrame(seguir);
+      });
+      hero.addEventListener('pointerleave', () => {
+        tx = 0.5; ty = 0.5;
+        if (!rafHero) rafHero = requestAnimationFrame(seguir);
+      });
+    }
+
+    // Scroll → --hs (0 arriba, 1 cuando se recorrió el 80% del hero)
+    let tickHero = false;
+    const salidaHero = () => {
+      tickHero = false;
+      const p = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight * 0.8)));
+      hero.style.setProperty('--hs', p.toFixed(3));
+    };
+    window.addEventListener('scroll', () => {
+      if (!tickHero) { tickHero = true; requestAnimationFrame(salidaHero); }
+    }, { passive: true });
+    salidaHero();
+  }
+
   // Año del footer
   const anio = document.getElementById('anio');
   if (anio) anio.textContent = new Date().getFullYear();

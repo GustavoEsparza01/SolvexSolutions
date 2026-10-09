@@ -99,8 +99,8 @@ nav.scrolled { background: rgba(8,12,20,0.92); border-bottom-color: var(--border
   position: absolute; inset: 0; opacity: 0.05;
   background-image: linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px);
   background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 45%, #000 0%, transparent 75%);
-          mask-image: radial-gradient(ellipse 70% 60% at 70% 45%, #000 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 55% at calc(var(--mx, 0.7) * 100%) calc(var(--my, 0.45) * 100%), #000 0%, transparent 75%);
+          mask-image: radial-gradient(ellipse 60% 55% at calc(var(--mx, 0.7) * 100%) calc(var(--my, 0.45) * 100%), #000 0%, transparent 75%);
   pointer-events: none;
 }
 .hero-glow {
@@ -146,12 +146,60 @@ h1 em { font-style: normal; color: var(--accent); }
 .pill--blue { background: var(--accent2); color: #FFFFFF; }
 .pill--outline { background: var(--bg2); color: var(--accent); border: 1px solid var(--accent-line); }
 .h1-pill { vertical-align: middle; margin-left: 0.4em; transform: translateY(-0.18em) rotate(-4deg); animation: pillFloat 6s ease-in-out infinite; }
-.hero-float { position: absolute; z-index: 2; animation: pillFloat 7s ease-in-out infinite; }
-.hero-float--1 { top: 0.25rem; right: 2%; rotate: 6deg; animation-delay: -2s; }
-.hero-float--2 { top: 0.5rem; left: 46%; rotate: -5deg; animation-delay: -4s; }
+.hero-float { position: absolute; z-index: 2; animation: pillIn 0.6s var(--ease) both, pillFloat 7s ease-in-out infinite; }
+.hero-float--1 { top: 0.25rem; right: 2%; rotate: 6deg; animation-delay: 1.2s, 1.8s; }
+.hero-float--2 { top: 0.5rem; left: 46%; rotate: -5deg; animation-delay: 1.35s, 2.1s; }
 @keyframes pillFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -6px; } }
 @media (max-width: 1200px) { .hero-float--1 { top: -0.75rem; } .hero-float--2 { display: none; } }
 @media (max-width: 768px) { .hero-float { display: none; } .h1-pill { margin-left: 0; margin-top: 0.4em; } }
+
+/* =====================
+   HERO — CINEMÁTICO
+   --mx / --my (0–1): posición suavizada del cursor sobre el hero (main.js)
+   --hs (0–1): avance del scroll al salir del hero (main.js)
+===================== */
+.hero-spot {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(640px circle at calc(var(--mx, 0.7) * 100%) calc(var(--my, 0.45) * 100%), rgba(0,229,195,0.14), rgba(0,102,255,0.04) 40%, transparent 65%);
+}
+
+/* Titular: cada palabra sube detrás de una máscara (las .w/.wi las crea main.js) */
+.hero h1.is-split .w {
+  display: inline-block; overflow: hidden; vertical-align: bottom;
+  padding: 0 0.05em 0.14em; margin: 0 -0.05em -0.14em; /* deja ver los descendentes (g, p) */
+}
+.hero h1.is-split .wi {
+  display: inline-block; transform: translateY(115%) rotate(5deg); transform-origin: left bottom;
+  animation: wordUp 1s var(--ease) forwards;
+  animation-delay: calc(var(--wi) * 85ms + 0.2s);
+}
+@keyframes wordUp { to { transform: none; } }
+
+/* Píldoras: aparecen con un "pop" después del titular y luego flotan */
+@keyframes pillIn { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
+.hero h1.is-split .h1-pill { opacity: 0; animation: pillIn 0.6s var(--ease) 1.05s forwards, pillFloat 6s ease-in-out 1.7s infinite; }
+
+/* Vista previa: entra desde la profundidad */
+.hero .hero-visual.reveal-right { transform: perspective(1200px) translateY(48px) scale(0.94); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+.hero .hero-visual.reveal-right.visible { transform: none; }
+
+/* Tras el titular entran párrafo, botones y cifras */
+.hero .hero-sub.reveal { transition-delay: 0.65s; }
+.hero .hero-actions.reveal { transition-delay: 0.8s; }
+.hero .hero-stats.reveal { transition-delay: 0.95s; }
+.hero .hero-visual.reveal { transition-delay: 0.45s; }
+.hero .hero-visual.reveal-right { transition-delay: 0.45s; }
+
+/* Paralaje de los avisos con el cursor */
+.mock-toast--alert { translate: calc((var(--mx, 0.5) - 0.5) * 34px) calc((var(--my, 0.5) - 0.5) * 22px); }
+.mock-toast--cita  { translate: calc((var(--mx, 0.5) - 0.5) * -26px) calc((var(--my, 0.5) - 0.5) * -18px); }
+
+/* Salida con el scroll (solo escritorio) */
+@media (min-width: 1025px) {
+  .hero-head { transform: translateY(calc(var(--hs, 0) * -80px)); opacity: calc(1 - var(--hs, 0) * 0.75); }
+  .hero-content { transform: translateY(calc(var(--hs, 0) * -40px)); }
+  .hero-visual { translate: 0 calc(var(--hs, 0) * -24px); }
+}
 .hero-sub {
   font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--muted-2); line-height: 1.7;
   max-width: 540px; margin-bottom: 2.4rem; font-weight: 400;
@@ -191,10 +239,10 @@ h1 em { font-style: normal; color: var(--accent); }
   background: linear-gradient(180deg, #111827 0%, #0D1220 100%);
   border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; overflow: hidden;
   box-shadow: 0 40px 80px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,229,195,0.05);
-  transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
-  transition: transform 0.6s var(--ease);
+  transform: perspective(1400px)
+    rotateY(calc(-6deg + (var(--mx, 0.5) - 0.5) * 14deg))
+    rotateX(calc(2deg - (var(--my, 0.5) - 0.5) * 10deg));
 }
-.hero-visual:hover .mock-window { transform: perspective(1400px) rotateY(-2deg) rotateX(0deg); }
 .mock-bar { display: flex; align-items: center; gap: 6px; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
 .mock-bar > span { width: 9px; height: 9px; border-radius: 50%; background: #2A3244; flex-shrink: 0; }
 .mock-url { margin-left: 0.75rem; font-size: 0.72rem; color: var(--muted); background: rgba(255,255,255,0.04); padding: 0.2rem 0.7rem; border-radius: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
