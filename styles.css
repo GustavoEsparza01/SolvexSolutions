@@ -1277,6 +1277,123 @@ body[data-tone="nfc"] { background-color: #0E1222; }
 }
 
 /* =====================
+   COMBOS + MENÚ DIGITAL
+===================== */
+#combos { background: #0E1222; padding: 7rem 4rem; }
+.combos-head {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 3rem; align-items: end; margin-bottom: 3rem;
+}
+.combos-title { font-size: clamp(2rem, 4.4vw, 3.6rem); letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 0; }
+.combos-head .section-sub { color: var(--muted-2); font-size: 1.05rem; margin-bottom: 0.4rem; }
+
+.combos-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; align-items: stretch; }
+.combo {
+  position: relative; display: flex; flex-direction: column; gap: 1rem;
+  padding: 2rem 1.75rem; border-radius: 22px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  transition: border-color 0.3s, transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.combo:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.22); box-shadow: 0 30px 60px -35px rgba(0,0,0,0.8); }
+.combo--best {
+  background: linear-gradient(180deg, rgba(var(--accent-rgb),0.12), rgba(var(--accent-rgb),0.03));
+  border-color: var(--accent-line);
+}
+.combo--best:hover { border-color: var(--accent); }
+.combo-badge {
+  position: absolute; top: -0.8rem; left: 1.75rem;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 0.3rem 0.7rem; border-radius: 999px; background: var(--accent); color: var(--accent-ink);
+}
+.combo-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; }
+.combo-items { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; flex-grow: 1; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.combo-items li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.98rem; color: var(--muted-2); }
+.combo-items strong { color: var(--text); font-weight: 700; min-width: 1.2em; }
+.combo-ico { width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0; background: var(--accent-soft) center / 16px no-repeat; border: 1px solid rgba(var(--accent-rgb),0.22); }
+/* Íconos como SVG embebido (cubiertos / estrella / pantalla) en el turquesa de la marca */
+.combo-ico--menu { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231FE0C0' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M7 2v20M4 2v6a3 3 0 0 0 6 0V2M17 2c-1.7 0-3 2.2-3 5s1.3 4 3 4v11'/%3E%3C/svg%3E"); }
+.combo-ico--google { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231FE0C0' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L7 14.2 2 9.3l6.9-1z'/%3E%3C/svg%3E"); }
+.combo-ico--web { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231FE0C0' stroke-width='2' stroke-linecap='round'%3E%3Crect x='7' y='2' width='10' height='20' rx='2'/%3E%3Cpath d='M11 18h2'/%3E%3C/svg%3E"); }
+.combo-price { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(2rem, 3vw, 2.6rem); letter-spacing: -0.03em; line-height: 1; }
+.combo--best .combo-price { color: var(--accent); }
+.combo-save { font-size: 0.88rem; color: var(--muted-2); margin-top: -0.4rem; }
+.combo-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 48px;
+  border-radius: 12px; font-weight: 600; text-decoration: none;
+  border: 1px solid var(--accent-line); color: var(--accent);
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.combo-cta:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.combo-cta:hover .btn-arrow { transform: translateX(4px); }
+.combo--best .combo-cta { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.combo--best .combo-cta:hover { background: var(--accent-hover); }
+
+/* ¿No tienes menú digital? */
+.digital-band {
+  margin-top: 4rem; padding: 3rem; border-radius: 28px;
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 3rem; align-items: center;
+  background: var(--bg2); border: 1px solid rgba(255,255,255,0.08);
+}
+.digital-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+.digital-copy > p { color: var(--muted-2); font-size: 1.05rem; line-height: 1.7; max-width: 54ch; }
+.digital-steps { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+.digital-steps li { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 1rem; border-top: 2px solid rgba(255,255,255,0.12); font-size: 0.9rem; color: var(--muted-2); line-height: 1.5; }
+.digital-steps li:first-child { border-top-color: var(--accent); }
+.digital-steps span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--accent); }
+.digital-steps strong { display: block; color: var(--text); font-size: 1rem; margin-bottom: 0.2rem; }
+.digital-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* Celular de ejemplo */
+.digital-phone { position: relative; display: grid; place-items: center; padding: 1rem 0; }
+.phone {
+  position: relative; width: min(100%, 250px); aspect-ratio: 9 / 18.5; border-radius: 38px; padding: 10px;
+  background: linear-gradient(160deg, #2A2A31, #111115); box-shadow: 0 40px 70px -30px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.12);
+  transform: rotate(4deg); transition: transform 0.6s var(--ease);
+}
+.digital-band:hover .phone { transform: rotate(0deg) translateY(-4px); }
+.phone-notch { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); width: 34%; height: 18px; border-radius: 10px; background: #0B0B0E; z-index: 2; }
+.phone-screen {
+  height: 100%; border-radius: 29px; overflow: hidden; padding: 40px 14px 14px;
+  background: #F7F3EC; color: #1E1B16; display: flex; flex-direction: column; gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+}
+.pm-head { display: flex; align-items: center; gap: 9px; }
+.pm-logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); flex-shrink: 0; }
+.pm-head b { display: block; font-size: 13px; }
+.pm-head small { display: block; font-size: 10px; color: #6B655B; }
+.pm-tabs { display: flex; gap: 6px; }
+.pm-tabs span { font-size: 10px; font-weight: 600; padding: 5px 9px; border-radius: 999px; background: #E9E2D6; color: #4A453D; }
+.pm-tabs span.on { background: #1E1B16; color: #F7F3EC; }
+.pm-item { display: flex; align-items: center; gap: 9px; padding: 8px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 2px 6px rgba(30,27,22,0.06); }
+.pm-item b { display: block; font-size: 11.5px; }
+.pm-item small { display: block; font-size: 9.5px; color: #6B655B; }
+.pm-item em { margin-left: auto; font-style: normal; font-weight: 700; font-size: 12px; }
+.pm-img { width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0; }
+.pm-img--1 { background: linear-gradient(135deg, #F2A541, #C8553D); }
+.pm-img--2 { background: linear-gradient(135deg, #8FBF7F, #3E7D52); }
+.pm-img--3 { background: linear-gradient(135deg, #F3E9D2, #D9C49C); }
+.pm-btn { margin-top: auto; text-align: center; font-size: 11px; font-weight: 700; padding: 9px; border-radius: 10px; background: #1E1B16; color: #F7F3EC; }
+.digital-chip { left: -8%; bottom: 14%; }
+.digital-band.visible .digital-chip { opacity: 1; transform: none; transition-delay: 0.6s; }
+
+@media (max-width: 1100px) {
+  .combos-grid { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
+  .digital-band { grid-template-columns: minmax(0, 1fr); }
+  .digital-phone { order: -1; }
+}
+@media (max-width: 1024px) { #combos { padding: 5rem 2rem; } }
+@media (max-width: 900px) { .combos-head { grid-template-columns: minmax(0, 1fr); gap: 1rem; } }
+@media (max-width: 768px) {
+  #combos { padding: 4.5rem 1.5rem; }
+  .combos-title br, .digital-title br { display: none; }
+  .digital-band { padding: 2rem 1.25rem; border-radius: 20px; }
+  .digital-steps { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .digital-actions a { width: 100%; }
+  .digital-chip { left: 0; }
+}
+@media (max-width: 480px) { #combos { padding: 4rem 1rem; } }
+
+/* =====================
    TRANSICIONES ENTRE SECCIONES
 ===================== */
 /* 1. Fondo continuo: con JS las secciones son transparentes y el body cambia de tono
@@ -1285,7 +1402,7 @@ body { transition: background-color 1s var(--ease); }
 body[data-tone="alt"]  { background-color: var(--bg2); }
 body[data-tone="blue"] { background-color: var(--tone-blue); }
 body[data-tone="teal"] { background-color: var(--tone-teal); }
-.js :is(#servicios, #resenas-nfc, #menu-nfc, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
+.js :is(#servicios, #resenas-nfc, #menu-nfc, #combos, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
 
 /* 2. Títulos de sección: se descubren de abajo hacia arriba como una cortina.
       Máscara (no clip-path): Chrome cuenta el clip-path del propio elemento en
