@@ -27,7 +27,7 @@
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <a href="#contacto" class="nav-cta">Solicitar cotización</a>
-  <button class="hamburger" id="hamburger" aria-label="Menú">
+  <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -48,15 +48,22 @@
 <section class="hero" id="inicio">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-  <div class="hero-content">
+  <div class="hero-inner">
+  <div class="hero-head">
     <div class="hero-badge reveal">Desarrollo web a la medida · México</div>
-    <h1 class="reveal reveal-delay-1">Digitalizamos tu negocio.<br><em>Sin complicaciones.</em></h1>
+    <h1 class="reveal reveal-delay-1">Digitalizamos tu negocio.<br><em>Sin complicaciones.</em><span class="pill pill--blue h1-pill" aria-hidden="true">Inventario</span></h1>
+    <span class="pill pill--accent hero-float hero-float--1" aria-hidden="true">Página web</span>
+    <span class="pill pill--outline hero-float hero-float--2" aria-hidden="true">Agenda y citas</span>
+  </div>
+  <div class="hero-content">
     <p class="hero-sub reveal reveal-delay-2">Creamos sistemas y páginas web para pequeños y medianos emprendedores que quieren dejar el papel atrás y llevar su negocio al siguiente nivel.</p>
     <div class="hero-actions reveal reveal-delay-3">
-      <a href="#servicios" class="btn-primary">Ver servicios</a>
+      <a href="#servicios" class="btn-primary">Ver servicios
+        <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
       <a href="#contacto" class="btn-secondary">Hablar con nosotros</a>
     </div>
-    <div class="hero-stats">
+    <div class="hero-stats reveal reveal-delay-4">
       <div>
         <div class="stat-num">3<span>+</span></div>
         <div class="stat-label">Servicios especializados</div>
@@ -71,23 +78,86 @@
       </div>
     </div>
   </div>
+
+  <!-- Vista de ejemplo de un sistema (HTML/CSS, sin imágenes). Datos ilustrativos. -->
+  <div class="hero-visual reveal-right reveal-delay-2" role="img" aria-label="Ejemplo de un sistema de inventario web hecho a la medida, con alertas de stock y citas agendadas">
+    <div class="mock-window">
+      <div class="mock-bar">
+        <span></span><span></span><span></span>
+        <div class="mock-url">inventario.tunegocio.mx</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-side">
+          <i class="on"></i><i></i><i></i><i></i>
+        </div>
+        <div class="mock-main">
+          <div class="mock-head">
+            <div>
+              <div class="mock-title">Inventario</div>
+              <div class="mock-sub"><b class="mock-live"></b>En tiempo real</div>
+            </div>
+            <div class="mock-btn">+ Producto</div>
+          </div>
+          <div class="mock-kpis">
+            <div class="mock-kpi"><span>Productos</span><strong>248</strong></div>
+            <div class="mock-kpi"><span>Entradas hoy</span><strong>36</strong></div>
+            <div class="mock-kpi warn"><span>Stock bajo</span><strong>4</strong></div>
+          </div>
+          <div class="mock-chart">
+            <div class="mock-chart-label">Salidas de la semana</div>
+            <div class="mock-bars">
+              <i style="--h:42%"></i><i style="--h:58%"></i><i style="--h:50%"></i><i style="--h:74%"></i><i style="--h:66%"></i><i style="--h:92%"></i><i style="--h:38%"></i>
+            </div>
+          </div>
+          <div class="mock-table">
+            <div class="mock-row head"><span>Producto</span><span>Existencia</span><span>Estado</span></div>
+            <div class="mock-row"><span>Café molido 500 g</span><span>3</span><span class="tag warn">Bajo</span></div>
+            <div class="mock-row"><span>Pan dulce surtido</span><span>42</span><span class="tag ok">En stock</span></div>
+            <div class="mock-row"><span>Leche entera 1 L</span><span>18</span><span class="tag ok">En stock</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mock-toast mock-toast--alert">
+      <span class="mock-toast-icon"><svg viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg></span>
+      <span><strong>Stock bajo</strong><small>Café molido · quedan 3</small></span>
+    </div>
+    <div class="mock-toast mock-toast--cita">
+      <span class="mock-toast-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></span>
+      <span><strong>Nueva cita agendada</strong><small>Mañana · 10:30 a.m.</small></span>
+    </div>
+  </div>
+  </div>
 </section>
 
 <!-- =====================
      SERVICIOS
 ===================== -->
 <section id="servicios">
-  <div class="section-label reveal">Lo que hacemos</div>
-  <h2 class="reveal">Soluciones digitales para<br>tu negocio</h2>
-  <p class="section-sub reveal">Servicios concretos pensados para emprendedores que necesitan tecnología funcional, no complicaciones.</p>
-  <div class="services-grid">
+  <div class="container">
+  <div class="services-head">
+    <div>
+      <div class="section-label reveal">Lo que hacemos</div>
+      <h2 class="reveal">Soluciones digitales para<br>tu negocio</h2>
+    </div>
+    <p class="section-sub reveal reveal-delay-1">Servicios concretos pensados para emprendedores que necesitan tecnología funcional, no complicaciones.</p>
+  </div>
 
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+  <!-- Cada servicio es una fila: número/ícono · descripción · incluye · precio.
+       data-servicio coincide con una <option> del formulario para preseleccionarla. -->
+  <div class="services-list">
+
+    <article class="service-row reveal">
+      <div class="service-index">
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
       </div>
-      <h3>Página Web para tu Negocio</h3>
-      <p>Presencia digital profesional que atrae clientes y proyecta confianza — adaptada a celular y lista para recibir contactos.</p>
+      <div class="service-main">
+        <h3>Página Web para tu Negocio</h3>
+        <p>Presencia digital profesional que atrae clientes y proyecta confianza — adaptada a celular y lista para recibir contactos.</p>
+      </div>
       <ul class="service-includes">
         <li>Diseño personalizado con tu marca</li>
         <li>Catálogo de productos o servicios</li>
@@ -95,15 +165,27 @@
         <li>Formulario de contacto</li>
         <li>Adaptada para celular y escritorio</li>
       </ul>
-      <div class="service-price">Desde $3,000 MXN <small>· Entrega en 1–2 semanas</small></div>
-    </div>
-
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 3H8L6 7h12l-2-4z"/><path d="M12 12v4M10 14h4"/></svg>
+      <div class="service-price">
+        <span class="price-from">Desde</span>
+        <span class="price-amount">$3,000 <span class="price-cur">MXN</span></span>
+        <span class="price-time">Entrega en 1–2 semanas</span>
+        <a href="#contacto" class="service-cta" data-servicio="Página web para mi negocio" aria-label="Solicitar cotización: Página Web para tu Negocio">Solicitar cotización
+          <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
-      <h3>Sistema de Inventario Web</h3>
-      <p>Olvídate de cuadernos y hojas de Excel. Controla tu mercancía desde cualquier dispositivo con reportes en tiempo real.</p>
+    </article>
+
+    <article class="service-row service-row--featured reveal">
+      <div class="service-index">
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 3H8L6 7h12l-2-4z"/><path d="M12 12v4M10 14h4"/></svg>
+        </div>
+      </div>
+      <div class="service-main">
+        <h3>Sistema de Inventario Web</h3>
+        <p>Olvídate de cuadernos y hojas de Excel. Controla tu mercancía desde cualquier dispositivo con reportes en tiempo real.</p>
+      </div>
       <ul class="service-includes">
         <li>Registro y gestión de productos</li>
         <li>Control de entradas y salidas</li>
@@ -111,15 +193,27 @@
         <li>Reportes en PDF o Excel</li>
         <li>Acceso con usuario y contraseña</li>
       </ul>
-      <div class="service-price">Desde $8,000 MXN <small>· Entrega en 3–5 semanas</small></div>
-    </div>
-
-    <div class="service-card reveal reveal-delay-3">
-      <div class="service-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+      <div class="service-price">
+        <span class="price-from">Desde</span>
+        <span class="price-amount">$8,000 <span class="price-cur">MXN</span></span>
+        <span class="price-time">Entrega en 3–5 semanas</span>
+        <a href="#contacto" class="service-cta" data-servicio="Sistema de inventario" aria-label="Solicitar cotización: Sistema de Inventario Web">Solicitar cotización
+          <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
-      <h3>Sistema de Agenda y Citas</h3>
-      <p>Organiza tus citas sin cruces ni olvidos. Tus clientes ven tu disponibilidad y agendan en segundos desde su celular.</p>
+    </article>
+
+    <article class="service-row reveal">
+      <div class="service-index">
+        <span class="service-num">03</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+        </div>
+      </div>
+      <div class="service-main">
+        <h3>Sistema de Agenda y Citas</h3>
+        <p>Organiza tus citas sin cruces ni olvidos. Tus clientes ven tu disponibilidad y agendan en segundos desde su celular.</p>
+      </div>
       <ul class="service-includes">
         <li>Calendario visual de citas</li>
         <li>Registro de clientes</li>
@@ -127,9 +221,17 @@
         <li>Control de disponibilidad por horario</li>
         <li>Panel de administración propio</li>
       </ul>
-      <div class="service-price">Desde $7,000 MXN <small>· Entrega en 3–4 semanas</small></div>
-    </div>
+      <div class="service-price">
+        <span class="price-from">Desde</span>
+        <span class="price-amount">$7,000 <span class="price-cur">MXN</span></span>
+        <span class="price-time">Entrega en 3–4 semanas</span>
+        <a href="#contacto" class="service-cta" data-servicio="Sistema de agenda y citas" aria-label="Solicitar cotización: Sistema de Agenda y Citas">Solicitar cotización
+          <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </article>
 
+  </div>
   </div>
 </section>
 
@@ -137,30 +239,51 @@
      PROCESO
 ===================== -->
 <section id="proceso">
-  <div class="section-label">Cómo trabajamos</div>
-  <h2>Simple, claro y sin sorpresas</h2>
-  <p class="section-sub">Un proceso en 4 pasos donde tú siempre sabes qué está pasando con tu proyecto.</p>
-  <div class="process-steps">
-    <div class="step reveal reveal-delay-1">
-      <div class="step-num">01</div>
-      <h4>Consulta gratuita</h4>
-      <p>Platícanos tu negocio y la problemática que quieres resolver. Sin costo ni compromiso.</p>
+  <div class="container process-layout">
+    <!-- Columna fija en escritorio: título + contador del paso activo (main.js) -->
+    <div class="process-intro">
+      <div class="section-label reveal">Cómo trabajamos</div>
+      <h2 class="reveal">Simple, claro y sin sorpresas</h2>
+      <p class="section-sub reveal">Un proceso en 4 pasos donde tú siempre sabes qué está pasando con tu proyecto.</p>
+      <div class="process-counter" aria-hidden="true">
+        <span class="pc-current" id="processCounter">01</span><span class="pc-total">/ 04</span>
+      </div>
     </div>
-    <div class="step reveal reveal-delay-2">
-      <div class="step-num">02</div>
-      <h4>Propuesta y acuerdo</h4>
-      <p>Te enviamos una propuesta detallada con tiempos, precio y alcance bien definidos.</p>
-    </div>
-    <div class="step reveal reveal-delay-3">
-      <div class="step-num">03</div>
-      <h4>Desarrollo con avances</h4>
-      <p>Construimos tu proyecto y te mostramos avances periódicos para ajustar sobre la marcha.</p>
-    </div>
-    <div class="step reveal reveal-delay-4">
-      <div class="step-num">04</div>
-      <h4>Entrega y soporte</h4>
-      <p>Lanzamos tu solución y te acompañamos para que todo funcione desde el primer día.</p>
-    </div>
+
+    <!-- Línea de tiempo: la línea se llena con el scroll (--progress) y cada paso se activa al cruzar el centro -->
+    <ol class="process-timeline" id="processTimeline">
+      <li class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>Consulta gratuita</h3>
+          <p>Platícanos tu negocio y la problemática que quieres resolver. Sin costo ni compromiso.</p>
+        </div>
+      </li>
+      <li class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>Propuesta y acuerdo</h3>
+          <p>Te enviamos una propuesta detallada con tiempos, precio y alcance bien definidos.</p>
+          <div class="step-pay"><span class="pay-tag">Pago</span><span class="pay-num">50%</span><span class="pay-label">Al iniciar</span></div>
+        </div>
+      </li>
+      <li class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>Desarrollo con avances</h3>
+          <p>Construimos tu proyecto y te mostramos avances periódicos para ajustar sobre la marcha.</p>
+          <div class="step-pay"><span class="pay-tag">Pago</span><span class="pay-num">25%</span><span class="pay-label">A la mitad</span></div>
+        </div>
+      </li>
+      <li class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h3>Entrega y soporte</h3>
+          <p>Lanzamos tu solución y te acompañamos para que todo funcione desde el primer día.</p>
+          <div class="step-pay"><span class="pay-tag">Pago</span><span class="pay-num">25%</span><span class="pay-label">Al entregar</span></div>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -168,73 +291,79 @@
      POR QUÉ NOSOTROS
 ===================== -->
 <section id="nosotros">
-  <div class="why-grid">
-    <div>
-      <div class="section-label reveal-left">Por qué elegirnos</div>
-      <h2 class="reveal-left">Tecnología que entiende<br>tu negocio</h2>
-      <p class="section-sub reveal-left">No somos una agencia genérica. Nos tomamos el tiempo de entender tu contexto antes de escribir una sola línea de código.</p>
-      <div class="why-points">
-        <div class="why-point reveal-left reveal-delay-1">
-          <div class="why-dot">
-            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+  <div class="container">
+    <div class="why-head">
+      <div class="section-label reveal">Por qué elegirnos</div>
+      <h2 class="why-title reveal">Tecnología que entiende<br> tu negocio</h2>
+    </div>
+
+    <div class="why-layout">
+      <!-- main.js divide este párrafo en palabras que se iluminan con el scroll -->
+      <p class="why-statement" id="whyStatement">No somos una agencia genérica. Nos tomamos el tiempo de <span class="hl">entender tu contexto</span> antes de escribir <span class="hl">una sola línea de código.</span></p>
+
+      <!-- Abanico: las tarjetas empiezan apiladas y se abren con el scroll (--fan, main.js) -->
+      <div class="why-fan" id="whyFan">
+        <article class="fan-card fan-card--1">
+          <div class="fan-card-top">
+            <span class="fan-num">01</span>
+            <span class="fan-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
           </div>
-          <div>
-            <h4>Soluciones a la medida</h4>
-            <p>Nada de plantillas genéricas. Cada proyecto se desarrolla pensando en tu negocio específico y tus clientes reales.</p>
+          <h3>Soluciones a la medida</h3>
+          <p>Nada de plantillas genéricas. Cada proyecto se desarrolla pensando en tu negocio específico y tus clientes reales.</p>
+        </article>
+        <article class="fan-card fan-card--2">
+          <div class="fan-card-top">
+            <span class="fan-num">02</span>
+            <span class="fan-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
           </div>
-        </div>
-        <div class="why-point reveal-left reveal-delay-2">
-          <div class="why-dot">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <h3>Tiempos y precios claros</h3>
+          <p>Sin sorpresas. Antes de empezar tienes por escrito el costo, el tiempo de entrega y todo el alcance del proyecto.</p>
+        </article>
+        <article class="fan-card fan-card--3">
+          <div class="fan-card-top">
+            <span class="fan-num">03</span>
+            <span class="fan-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           </div>
-          <div>
-            <h4>Tiempos y precios claros</h4>
-            <p>Sin sorpresas. Antes de empezar tienes por escrito el costo, el tiempo de entrega y todo el alcance del proyecto.</p>
-          </div>
-        </div>
-        <div class="why-point reveal-left reveal-delay-3">
-          <div class="why-dot">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div>
-            <h4>Trato cercano y directo</h4>
-            <p>Hablas directamente con el desarrollador. Sin intermediarios, con respuesta en menos de 48 horas.</p>
-          </div>
-        </div>
+          <h3>Trato cercano y directo</h3>
+          <p>Hablas directamente con el desarrollador. Sin intermediarios, con respuesta en menos de 48 horas.</p>
+        </article>
       </div>
     </div>
-    <div class="why-visual reveal-right">
-      <div class="why-visual-title">Stack tecnológico</div>
-      <div>
-        <span class="tech-tag active">HTML / CSS</span>
-        <span class="tech-tag active">JavaScript</span>
-        <span class="tech-tag active">Node.js</span>
-        <span class="tech-tag active">PHP</span>
-        <span class="tech-tag active">Python</span>
-        <span class="tech-tag active">MySQL</span>
-        <span class="tech-tag active">MongoDB</span>
-        <span class="tech-tag">React</span>
-        <span class="tech-tag">REST APIs</span>
-        <span class="tech-tag">Responsive Design</span>
-        <span class="tech-tag">Git</span>
-        <span class="tech-tag">Deploy & Hosting</span>
+  </div>
+
+  <!-- Stack tecnológico en cinta continua. La primera lista es la real; las copias son solo visuales (aria-hidden). -->
+  <div class="tech-band">
+    <div class="tech-band-label">Stack tecnológico</div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <ul class="tech-list">
+          <li class="tech-pill active">HTML / CSS</li><li class="tech-pill active">JavaScript</li><li class="tech-pill active">Node.js</li><li class="tech-pill active">PHP</li><li class="tech-pill active">Python</li><li class="tech-pill active">MySQL</li><li class="tech-pill active">MongoDB</li>
+        </ul>
+        <ul class="tech-list" aria-hidden="true">
+          <li class="tech-pill active">HTML / CSS</li><li class="tech-pill active">JavaScript</li><li class="tech-pill active">Node.js</li><li class="tech-pill active">PHP</li><li class="tech-pill active">Python</li><li class="tech-pill active">MySQL</li><li class="tech-pill active">MongoDB</li>
+        </ul>
+        <ul class="tech-list" aria-hidden="true">
+          <li class="tech-pill active">HTML / CSS</li><li class="tech-pill active">JavaScript</li><li class="tech-pill active">Node.js</li><li class="tech-pill active">PHP</li><li class="tech-pill active">Python</li><li class="tech-pill active">MySQL</li><li class="tech-pill active">MongoDB</li>
+        </ul>
+        <ul class="tech-list" aria-hidden="true">
+          <li class="tech-pill active">HTML / CSS</li><li class="tech-pill active">JavaScript</li><li class="tech-pill active">Node.js</li><li class="tech-pill active">PHP</li><li class="tech-pill active">Python</li><li class="tech-pill active">MySQL</li><li class="tech-pill active">MongoDB</li>
+        </ul>
       </div>
-      <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-        <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; font-family: 'Syne', sans-serif;">Esquema de pago</div>
-        <div class="payment-scheme">
-          <div class="payment-step highlight">
-            <div class="pay-num">50%</div>
-            <div class="pay-label">Al iniciar</div>
-          </div>
-          <div class="payment-step">
-            <div class="pay-num">25%</div>
-            <div class="pay-label">A la mitad</div>
-          </div>
-          <div class="payment-step">
-            <div class="pay-num">25%</div>
-            <div class="pay-label">Al entregar</div>
-          </div>
-        </div>
+    </div>
+    <div class="marquee marquee--reverse">
+      <div class="marquee-track">
+        <ul class="tech-list">
+          <li class="tech-pill">React</li><li class="tech-pill">REST APIs</li><li class="tech-pill">Responsive Design</li><li class="tech-pill">Git</li><li class="tech-pill">Deploy &amp; Hosting</li>
+        </ul>
+        <ul class="tech-list" aria-hidden="true">
+          <li class="tech-pill">React</li><li class="tech-pill">REST APIs</li><li class="tech-pill">Responsive Design</li><li class="tech-pill">Git</li><li class="tech-pill">Deploy &amp; Hosting</li>
+        </ul>
+        <ul class="tech-list" aria-hidden="true">
+          <li class="tech-pill">React</li><li class="tech-pill">REST APIs</li><li class="tech-pill">Responsive Design</li><li class="tech-pill">Git</li><li class="tech-pill">Deploy &amp; Hosting</li>
+        </ul>
+        <ul class="tech-list" aria-hidden="true">
+          <li class="tech-pill">React</li><li class="tech-pill">REST APIs</li><li class="tech-pill">Responsive Design</li><li class="tech-pill">Git</li><li class="tech-pill">Deploy &amp; Hosting</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -244,25 +373,35 @@
      CONTADORES ANIMADOS
 ===================== -->
 <section id="contadores">
-  <div class="counters-grid">
-    <div class="counter-card reveal reveal-delay-1">
-      <span class="counter-icon">🚀</span>
-      <div class="counter-num" data-target="15" data-suffix="+">0</div>
+  <!-- Cifras de exhibición (pendiente confirmar antes de publicar).
+       El HTML ya trae el valor final; main.js lo pone en 0 y lo anima al entrar en pantalla. -->
+  <div class="container counters-grid">
+    <div class="counter-card reveal">
+      <span class="counter-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+      </span>
+      <div class="counter-num" data-target="15" data-suffix="+">15+</div>
       <div class="counter-label">Proyectos entregados</div>
     </div>
-    <div class="counter-card reveal reveal-delay-2">
-      <span class="counter-icon">😊</span>
-      <div class="counter-num" data-target="12" data-suffix="+">0</div>
+    <div class="counter-card reveal reveal-delay-1">
+      <span class="counter-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+      </span>
+      <div class="counter-num" data-target="12" data-suffix="+">12+</div>
       <div class="counter-label">Clientes satisfechos</div>
     </div>
-    <div class="counter-card reveal reveal-delay-3">
-      <span class="counter-icon">⚡</span>
-      <div class="counter-num" data-target="48" data-suffix="h">0</div>
+    <div class="counter-card reveal reveal-delay-2">
+      <span class="counter-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </span>
+      <div class="counter-num" data-target="48" data-suffix="h">48h</div>
       <div class="counter-label">Tiempo de respuesta</div>
     </div>
-    <div class="counter-card reveal reveal-delay-4">
-      <span class="counter-icon">🎯</span>
-      <div class="counter-num" data-target="100" data-suffix="%">0</div>
+    <div class="counter-card reveal reveal-delay-3">
+      <span class="counter-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </span>
+      <div class="counter-num" data-target="100" data-suffix="%">100%</div>
       <div class="counter-label">A la medida de tu negocio</div>
     </div>
   </div>
@@ -272,38 +411,63 @@
      COMPARACIÓN PAPEL VS DIGITAL
 ===================== -->
 <section id="comparacion">
-  <div class="section-label reveal">El cambio que necesitas</div>
-  <h2 class="reveal">Papel vs Digital —<br>la diferencia es clara</h2>
-  <p class="section-sub reveal">Así se ve el mismo negocio antes y después de digitalizar sus procesos con SolvexSolutions.</p>
-  <div class="comparison-wrapper">
-    <div class="comparison-grid reveal">
-      <div class="comp-col">
-        <div class="comp-header old">
-          <span class="comp-dot red"></span> Sin digitalizar
-        </div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Registros en papel o cuadernos</div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Inventario difícil de consultar</div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Citas perdidas o duplicadas</div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Sin presencia en internet</div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Clientes no te encuentran</div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Reportes tardados y con errores</div>
-        <div class="comp-item old-item"><span class="comp-icon x">✕</span> Información difícil de respaldar</div>
-      </div>
-      <div class="comp-col">
-        <div class="comp-header new">
-          <span class="comp-dot green"></span> Con SolvexSolutions
-        </div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Todo en un sistema ordenado</div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Inventario en tiempo real</div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Agenda digital con recordatorios</div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Página web profesional activa 24/7</div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Clientes te encuentran en Google</div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Reportes automáticos en segundos</div>
-        <div class="comp-item new-item"><span class="comp-icon check">✓</span> Datos seguros en la nube</div>
-      </div>
+  <div class="container">
+    <div class="comp-head">
+      <!-- Eco en contorno detrás del título (decorativo) -->
+      <div class="comp-echo" aria-hidden="true">Digital</div>
+      <div class="section-label reveal">El cambio que necesitas</div>
+      <h2 class="comp-title reveal">Papel vs Digital —<br> la diferencia es clara</h2>
+      <p class="section-sub reveal">Así se ve el mismo negocio antes y después de digitalizar sus procesos con SolvexSolutions.</p>
     </div>
-    <div style="text-align:center; margin-top: 2.5rem;" class="reveal">
-      <a href="#contacto" class="btn-primary">Quiero digitalizar mi negocio</a>
+
+    <!-- Interruptor antes/después. Sin JS se ocultan los botones y se muestran ambas listas. -->
+    <div class="comp-switch" role="group" aria-label="Comparar el negocio antes y después">
+      <span class="comp-switch-indicator" aria-hidden="true"></span>
+      <button type="button" class="comp-tab" data-estado="papel" aria-pressed="true">Sin digitalizar</button>
+      <button type="button" class="comp-tab" data-estado="digital" aria-pressed="false">Con SolvexSolutions</button>
+    </div>
+
+    <div class="comp-board" id="compBoard">
+      <div class="comp-board-head" aria-hidden="true">
+        <span class="comp-state comp-state--papel">Sin digitalizar</span>
+        <span class="comp-state comp-state--digital">Con SolvexSolutions</span>
+      </div>
+      <ul class="comp-list">
+        <li class="comp-row" style="--i:0">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Registros en papel o cuadernos</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Todo en un sistema ordenado</span>
+        </li>
+        <li class="comp-row" style="--i:1">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Inventario difícil de consultar</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Inventario en tiempo real</span>
+        </li>
+        <li class="comp-row" style="--i:2">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Citas perdidas o duplicadas</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Agenda digital con recordatorios</span>
+        </li>
+        <li class="comp-row" style="--i:3">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Sin presencia en internet</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Página web profesional activa 24/7</span>
+        </li>
+        <li class="comp-row" style="--i:4">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Clientes no te encuentran</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Clientes te encuentran en Google</span>
+        </li>
+        <li class="comp-row" style="--i:5">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Reportes tardados y con errores</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Reportes automáticos en segundos</span>
+        </li>
+        <li class="comp-row" style="--i:6">
+          <span class="comp-old"><i class="ci ci-x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></i>Información difícil de respaldar</span>
+          <span class="comp-new"><i class="ci ci-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>Datos seguros en la nube</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="comp-cta reveal">
+      <a href="#contacto" class="btn-primary">Quiero digitalizar mi negocio
+        <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -312,72 +476,87 @@
      CONTACTO
 ===================== -->
 <section id="contacto">
-  <div class="section-label reveal">Hablemos</div>
-  <h2 class="reveal">¿Listo para digitalizar<br>tu negocio?</h2>
-  <p class="section-sub reveal">Cuéntanos tu proyecto. La consulta inicial es completamente gratuita y sin compromiso.</p>
-  <div class="contact-grid">
-    <div class="contact-info reveal-left">
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6.29 6.29l1.46-1.46a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div>
-          <strong>WhatsApp</strong>
-          <p>Respuesta en menos de 24 horas</p>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <strong>contacto@solvexsolutions.mx</strong>
-          <p>Para proyectos y propuestas formales</p>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div>
-          <strong>Ciudad del Carmen, Campeche</strong>
-          <p>Servicio a todo México de forma remota</p>
-        </div>
-      </div>
+  <div class="container">
+    <div class="contact-head">
+      <div class="section-label reveal">Hablemos</div>
+      <h2 class="contact-title reveal">¿Listo para digitalizar<br> tu negocio?</h2>
     </div>
 
-    <!-- FORMULARIO - Los datos se envían a través de main.js → enviarMensaje() -->
-    <!-- TODO: Conectar con backend /api/contacto cuando esté listo -->
-    <div class="contact-form reveal-right">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="name">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="section-sub">Cuéntanos tu proyecto. La consulta inicial es completamente gratuita y sin compromiso.</p>
+
+        <!-- TODO: Cambia el número 529931234567 por tu número real (también en el botón flotante) -->
+        <a class="contact-item" href="https://wa.me/529931234567?text=Hola%20SolvexSolutions%2C%20me%20interesa%20conocer%20sus%20servicios" target="_blank" rel="noopener">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6.29 6.29l1.46-1.46a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span class="contact-text">
+            <strong>WhatsApp</strong>
+            <span>Respuesta en menos de 24 horas</span>
+          </span>
+          <svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+
+        <a class="contact-item" href="mailto:contacto@solvexsolutions.mx">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <span class="contact-text">
+            <strong>contacto@solvexsolutions.mx</strong>
+            <span>Para proyectos y propuestas formales</span>
+          </span>
+          <svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+
+        <div class="contact-item contact-item--static">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="contact-text">
+            <strong>Ciudad del Carmen, Campeche</strong>
+            <span>Servicio a todo México de forma remota</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- FORMULARIO - Los datos se envían a través de main.js → enviarMensaje() -->
+      <!-- TODO: Conectar con backend /api/contacto cuando esté listo -->
+      <form class="contact-form reveal" novalidate onsubmit="event.preventDefault(); enviarMensaje();">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre" class="req">Nombre</label>
+            <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="name" aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="negocio">Negocio</label>
+            <input type="text" id="negocio" placeholder="Nombre de tu negocio" autocomplete="organization">
+          </div>
         </div>
         <div class="form-group">
-          <label for="negocio">Negocio</label>
-          <input type="text" id="negocio" placeholder="Nombre de tu negocio">
+          <label for="email" class="req">Correo electrónico</label>
+          <input type="email" id="email" placeholder="correo@ejemplo.com" autocomplete="email" aria-required="true">
         </div>
-      </div>
-      <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" placeholder="correo@ejemplo.com" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label for="servicio">Servicio de interés</label>
-        <select id="servicio">
-          <option value="">Selecciona un servicio...</option>
-          <option>Página web para mi negocio</option>
-          <option>Sistema de inventario</option>
-          <option>Sistema de agenda y citas</option>
-          <option>Otro / No sé aún</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="mensaje">Cuéntanos tu proyecto</label>
-        <textarea id="mensaje" rows="4" placeholder="¿Qué problema quieres resolver? ¿Qué hace tu negocio?"></textarea>
-      </div>
-      <button class="btn-send" onclick="enviarMensaje()">Enviar mensaje</button>
+        <div class="form-group">
+          <label for="servicio">Servicio de interés</label>
+          <select id="servicio">
+            <option value="">Selecciona un servicio...</option>
+            <option>Página web para mi negocio</option>
+            <option>Sistema de inventario</option>
+            <option>Sistema de agenda y citas</option>
+            <option>Otro / No sé aún</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje" class="req">Cuéntanos tu proyecto</label>
+          <textarea id="mensaje" rows="4" placeholder="¿Qué problema quieres resolver? ¿Qué hace tu negocio?" aria-required="true"></textarea>
+        </div>
+        <button type="submit" class="btn-send">Enviar mensaje
+          <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <!-- Mensajes de validación / confirmación (reemplazan los alert) -->
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -388,19 +567,33 @@
 ===================== -->
 <a href="https://wa.me/529931234567?text=Hola%20SolvexSolutions%2C%20me%20interesa%20conocer%20sus%20servicios"
    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
   </svg>
 </a>
-<div class="whatsapp-tooltip">¡Escríbenos por WhatsApp!</div>
+<div class="whatsapp-tooltip" aria-hidden="true">¡Escríbenos por WhatsApp!</div>
 
 <!-- =====================
      FOOTER
 ===================== -->
 <footer>
-  <a href="#inicio" class="logo" style="font-size:1rem;">Solvex<span>Solutions</span></a>
-  <p>© 2025 SolvexSolutions · Ciudad del Carmen, Campeche · México</p>
-  <p style="font-size:0.75rem;">Desarrollo web a la medida</p>
+  <div class="container">
+    <div class="footer-top">
+      <a href="#inicio" class="logo">Solvex<span>Solutions</span></a>
+      <ul class="footer-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <!-- El año se actualiza solo desde main.js -->
+      <p>© <span id="anio">2025</span> SolvexSolutions · Ciudad del Carmen, Campeche · México</p>
+      <p>Desarrollo web a la medida</p>
+    </div>
+  </div>
+  <div class="footer-mark" aria-hidden="true">SolvexSolutions</div>
 </footer>
 
 <!-- SCRIPTS -->

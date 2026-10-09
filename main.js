@@ -14,6 +14,9 @@
    - Ejemplo: fetch('/api/contacto', { method: 'POST', body: formData })
 ===================== */
 
+// Marca que hay JS: el CSS muestra controles que solo funcionan con script (p. ej. el interruptor papel/digital)
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // =====================
@@ -24,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('open');
+    const abierto = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', abierto);
+    hamburger.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
   });
 
   // Cerrar al hacer clic afuera
@@ -39,19 +44,186 @@ document.addEventListener('DOMContentLoaded', () => {
   // =====================
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
+  const nav = document.querySelector('nav');
 
-  window.addEventListener('scroll', () => {
+  function actualizarNav() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
     let current = '';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
       if (window.scrollY >= sectionTop) current = section.getAttribute('id');
     });
     navLinks.forEach(link => {
-      link.style.color = link.getAttribute('href') === '#' + current
-        ? 'var(--text)'
-        : '';
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', actualizarNav, { passive: true });
+  actualizarNav();
+
+  // =====================
+  // 2b. SERVICIOS — luz que sigue al cursor + preseleccionar servicio en el formulario
+  // =====================
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.service-row').forEach(row => {
+      row.addEventListener('pointermove', (e) => {
+        const r = row.getBoundingClientRect();
+        row.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        row.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  const selectServicio = document.getElementById('servicio');
+  document.querySelectorAll('.service-cta[data-servicio]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (selectServicio) selectServicio.value = link.dataset.servicio;
     });
   });
+
+  // =====================
+  // 2c. PROCESO — línea de tiempo que se llena con el scroll
+  // =====================
+  const timeline = document.getElementById('processTimeline');
+  if (timeline) {
+    const steps = [...timeline.querySelectorAll('.step')];
+    const counter = document.getElementById('processCounter');
+    let ticking = false;
+    let pasoActual = 0;
+
+    // La línea termina en el centro del último círculo (el último paso tiene contenido debajo)
+    function medirLinea() {
+      const centroDe = (step) => {
+        const c = step.querySelector('.step-num').getBoundingClientRect();
+        return c.top + c.height / 2;
+      };
+      const inicio = centroDe(steps[0]), fin = centroDe(steps[steps.length - 1]);
+      timeline.style.setProperty('--line-end', (timeline.getBoundingClientRect().bottom - fin) + 'px');
+      return { inicio, fin };
+    }
+
+    function actualizarProceso() {
+      ticking = false;
+      const { inicio, fin } = medirLinea();
+      const centro = window.innerHeight * 0.55;
+      const progreso = Math.min(1, Math.max(0, (centro - inicio) / (fin - inicio)));
+      timeline.style.setProperty('--progress', progreso.toFixed(3));
+
+      let activo = 0;
+      steps.forEach((step, i) => {
+        if (step.getBoundingClientRect().top < centro) activo = i + 1;
+      });
+      steps.forEach((step, i) => {
+        step.classList.toggle('is-done', i < activo - 1);
+        step.classList.toggle('is-active', i === activo - 1);
+      });
+
+      if (counter && activo && activo !== pasoActual) {
+        counter.textContent = String(activo).padStart(2, '0');
+        counter.classList.remove('tick');
+        void counter.offsetWidth; // reinicia la animación
+        counter.classList.add('tick');
+      }
+      pasoActual = activo;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(actualizarProceso); }
+    }, { passive: true });
+    window.addEventListener('resize', actualizarProceso);
+    actualizarProceso();
+  }
+
+  // =====================
+  // 2d. NOSOTROS — párrafo que se ilumina por palabra + abanico de tarjetas
+  // =====================
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const statement = document.getElementById('whyStatement');
+  const fan = document.getElementById('whyFan');
+
+  // Avance (0–1) de un elemento entre dos alturas del viewport (fracciones de innerHeight)
+  function avance(el, desde, hasta) {
+    const top = el.getBoundingClientRect().top;
+    const h = window.innerHeight;
+    return Math.min(1, Math.max(0, (h * desde - top) / (h * (desde - hasta))));
+  }
+
+  let palabras = [];
+  if (statement && !reduceMotion) {
+    // Envuelve cada palabra en <span class="w"> sin perder los .hl
+    const walker = document.createTreeWalker(statement, NodeFilter.SHOW_TEXT);
+    const nodos = [];
+    while (walker.nextNode()) nodos.push(walker.currentNode);
+    nodos.forEach(nodo => {
+      const frag = document.createDocumentFragment();
+      nodo.textContent.split(/(\s+)/).forEach(parte => {
+        if (!parte) return;
+        if (/^\s+$/.test(parte)) { frag.appendChild(document.createTextNode(parte)); return; }
+        const span = document.createElement('span');
+        span.className = 'w';
+        span.textContent = parte;
+        frag.appendChild(span);
+      });
+      nodo.replaceWith(frag);
+    });
+    statement.classList.add('is-split');
+    palabras = [...statement.querySelectorAll('.w')];
+  }
+
+  if (fan && reduceMotion) fan.style.setProperty('--fan', 1);
+
+  if ((palabras.length || fan) && !reduceMotion) {
+    let tickNos = false;
+    function actualizarNosotros() {
+      tickNos = false;
+      if (palabras.length) {
+        const n = Math.round(avance(statement, 0.85, 0.35) * palabras.length);
+        palabras.forEach((w, i) => w.classList.toggle('lit', i < n));
+      }
+      if (fan) fan.style.setProperty('--fan', avance(fan, 0.95, 0.4).toFixed(3));
+    }
+    window.addEventListener('scroll', () => {
+      if (!tickNos) { tickNos = true; requestAnimationFrame(actualizarNosotros); }
+    }, { passive: true });
+    window.addEventListener('resize', actualizarNosotros);
+    actualizarNosotros();
+  }
+
+  // =====================
+  // 2e. PAPEL VS DIGITAL — interruptor antes/después
+  // =====================
+  const compBoard = document.getElementById('compBoard');
+  const compSwitch = document.querySelector('.comp-switch');
+  if (compBoard && compSwitch) {
+    const tabs = compSwitch.querySelectorAll('.comp-tab');
+    let elegidoPorUsuario = false;
+
+    function ponerEstado(estado) {
+      compBoard.dataset.estado = estado;
+      compSwitch.dataset.estado = estado;
+      tabs.forEach(t => t.setAttribute('aria-pressed', t.dataset.estado === estado));
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      elegidoPorUsuario = true;
+      ponerEstado(tab.dataset.estado);
+    }));
+    ponerEstado('papel');
+
+    // Al llegar al tablero, el negocio "se digitaliza" solo una vez (si el usuario no ha tocado el interruptor)
+    const compObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        compObserver.disconnect();
+        setTimeout(() => { if (!elegidoPorUsuario) ponerEstado('digital'); }, 1200);
+      });
+    }, { threshold: 0.6 });
+    compObserver.observe(compBoard);
+  }
+
+  // Año del footer
+  const anio = document.getElementById('anio');
+  if (anio) anio.textContent = new Date().getFullYear();
 
   // =====================
   // 3. SCROLL REVEAL ANIMATION
@@ -105,7 +277,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const counterSection = document.getElementById('contadores');
-  if (counterSection) {
+  if (counterSection && reduceMotion) {
+    countersStarted = true; // el HTML ya muestra el valor final
+  } else if (counterSection) {
+    counterSection.querySelectorAll('.counter-num').forEach(el => {
+      el.textContent = '0' + (el.dataset.suffix || '');
+    });
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) animateCounters();
@@ -124,12 +301,14 @@ function closeMobileMenu() {
   const mobileMenu = document.getElementById('mobileMenu');
   hamburger.classList.remove('active');
   mobileMenu.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-label', 'Abrir menú');
 }
 
 // =====================
 // 6. FORMULARIO DE CONTACTO
 // =====================
-// TODO: Reemplaza el alert con una llamada a tu API backend
+// TODO: Reemplaza el console.log con una llamada a tu API backend
 // Ejemplo con fetch:
 //
 // async function enviarMensaje() {
@@ -144,6 +323,22 @@ function closeMobileMenu() {
 //   else mostrarError(result.mensaje);
 // }
 
+// Muestra el resultado dentro del formulario (#formStatus, aria-live) en lugar de alert()
+function mostrarEstado(texto, tipo) {
+  const status = document.getElementById('formStatus');
+  if (!status) return;
+  status.textContent = texto;
+  status.className = 'form-status ' + (tipo === 'ok' ? 'is-ok' : 'is-error');
+}
+
+// Marca los campos inválidos y enfoca el primero
+function marcarInvalidos(ids) {
+  ['nombre', 'email', 'mensaje'].forEach(id => {
+    document.getElementById(id).setAttribute('aria-invalid', ids.includes(id));
+  });
+  if (ids.length) document.getElementById(ids[0]).focus();
+}
+
 function enviarMensaje() {
   const nombre  = document.getElementById('nombre').value.trim();
   const email   = document.getElementById('email').value.trim();
@@ -153,19 +348,23 @@ function enviarMensaje() {
 
   // Validación básica
   if (!nombre || !email || !mensaje) {
-    alert('Por favor completa los campos obligatorios: nombre, correo y mensaje.');
+    marcarInvalidos([!nombre && 'nombre', !email && 'email', !mensaje && 'mensaje'].filter(Boolean));
+    mostrarEstado('Por favor completa los campos obligatorios: nombre, correo y mensaje.', 'error');
     return;
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    alert('Por favor ingresa un correo electrónico válido.');
+    marcarInvalidos(['email']);
+    mostrarEstado('Por favor ingresa un correo electrónico válido.', 'error');
     return;
   }
 
+  marcarInvalidos([]);
+
   // --- REEMPLAZAR con llamada a API cuando tengas backend ---
   console.log('Datos del formulario:', { nombre, email, negocio, servicio, mensaje });
-  alert(`¡Gracias ${nombre}! Tu mensaje fue enviado. Te contactaremos pronto.`);
+  mostrarEstado(`¡Gracias ${nombre}! Tu mensaje fue enviado. Te contactaremos pronto.`, 'ok');
 
   // Limpiar formulario
   document.getElementById('nombre').value = '';
