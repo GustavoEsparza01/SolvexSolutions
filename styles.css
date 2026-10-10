@@ -55,7 +55,7 @@ nav {
   transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 nav.scrolled { background: rgba(var(--bg-rgb),0.92); border-bottom-color: var(--border); }
-@media (max-width: 1200px) { nav { padding-left: 2rem; padding-right: 2rem; } .nav-links { gap: 1.6rem; } }
+@media (max-width: 1200px) { nav { padding-left: 2rem; padding-right: 2rem; } .nav-links { gap: 1.4rem; } }
 /* LOGO — Nubo Studio: ‹NUBO› + STUDIO. Medidas del diseño de referencia relativas al font-size
    (chevrón 26×48 y gap 8 sobre texto de 64px → .41em × .75em y .125em; STUDIO 12px → .1875em) */
 .logo {
@@ -445,6 +445,13 @@ h2 {
 .service-cta:hover .btn-arrow { transform: translateX(4px); }
 .service-row--featured .service-cta { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .service-row--featured .service-cta:hover { background: var(--accent-hover); }
+/* Enlace a la sección de reservaciones (demo en vivo) */
+.service-demo {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin: -1rem 0 1.25rem;
+  font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none;
+}
+.service-demo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: resvPulse 2s ease-out infinite; }
+.service-demo:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 1100px) {
   .service-row { grid-template-columns: 5rem minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; padding: 2.5rem 1.5rem; }
@@ -455,6 +462,7 @@ h2 {
   }
   .price-amount { margin: 0; font-size: 2.1rem; }
   .price-time { margin-bottom: 0; }
+  .service-demo { margin: 0; }
   .service-cta { margin: 0 0 0 auto; align-self: center; }
 }
 @media (max-width: 900px) {
@@ -1067,6 +1075,95 @@ footer { position: relative; overflow: hidden; background: var(--bg); border-top
 
 
 /* =====================
+   RESERVACIONES EN LÍNEA — reutiliza texto/beneficios/caja de las secciones NFC
+===================== */
+#reservaciones { background: var(--tone-blue); padding: 7rem 4rem; }
+.resv-layout {
+  display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 4rem; align-items: center;
+}
+.resv-live {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text);
+}
+.resv-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: resvPulse 2s ease-out infinite; }
+@keyframes resvPulse { 0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb),0.6); } 100% { box-shadow: 0 0 0 9px rgba(var(--accent-rgb),0); } }
+.resv-note { font-size: 0.92rem; color: var(--muted-2); line-height: 1.6; }
+
+/* Mockup: teléfono con el paso "Elige tu horario" (colores claros como la app real) */
+.resv-visual { position: relative; display: grid; place-items: center; padding: 2.5rem 1rem; }
+.resv-visual::before {
+  content: ''; position: absolute; width: 75%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent2-rgb),0.4), rgba(var(--accent-rgb),0.12) 45%, transparent 68%);
+  filter: blur(24px); pointer-events: none;
+}
+.resv-phone {
+  position: relative; width: min(100%, 300px); padding: 10px; border-radius: 40px;
+  background: #1C1C22; box-shadow: 0 50px 90px -35px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.12);
+  transform: perspective(1200px) rotateY(-8deg) rotateX(3deg) rotate(2deg);
+  transition: transform 0.7s var(--ease);
+  animation: nfcFloat 6s ease-in-out infinite;
+}
+.resv-visual:hover .resv-phone { transform: perspective(1200px) rotateY(-2deg) rotateX(1deg) rotate(0deg); }
+.resv-screen {
+  display: flex; flex-direction: column; gap: 0.7rem;
+  padding: 1.1rem 1rem 1.2rem; border-radius: 31px;
+  background: #F8FAFC; color: #0F172A; font-family: 'DM Sans', sans-serif;
+}
+.resv-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.6rem; border-bottom: 1px solid #E2E8F0; }
+.resv-brand { font-weight: 700; font-size: 0.9rem; letter-spacing: -0.01em; }
+.resv-brand em { font-weight: 500; color: #64748B; }
+.resv-avatar { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, #CBD5E1, #94A3B8); }
+.resv-step { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #64748B; margin-top: 0.2rem; }
+.resv-h { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.1; margin-top: -0.4rem; }
+.resv-picked {
+  display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 500;
+  padding: 0.55rem 0.7rem; border-radius: 10px; background: #EEF2F7; color: #334155;
+}
+.resv-days { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.35rem; }
+.resv-days span {
+  display: flex; flex-direction: column; align-items: center; padding: 0.4rem 0;
+  border-radius: 10px; border: 1px solid #E2E8F0; background: #FFF; font-weight: 700; font-size: 0.9rem;
+}
+.resv-days small { font-size: 0.62rem; font-weight: 500; color: #64748B; }
+.resv-days .is-on { background: #0F172A; border-color: #0F172A; color: #FFF; }
+.resv-days .is-on small { color: #CBD5E1; }
+.resv-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
+.resv-slots span {
+  text-align: center; padding: 0.45rem 0; border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+  border: 1px solid #E2E8F0; background: #FFF;
+}
+.resv-slots .is-off { color: #94A3B8; background: #F1F5F9; text-decoration: line-through; }
+.resv-slots .is-on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.resv-btn {
+  margin-top: 0.3rem; text-align: center; padding: 0.7rem; border-radius: 12px;
+  background: #0F172A; color: #FFF; font-weight: 600; font-size: 0.85rem;
+}
+.resv-visual .nfc-chip { z-index: 3; }
+.resv-chip--ok { top: 10%; right: 0; }
+.resv-chip--panel { bottom: 8%; left: 0; }
+.resv-visual.visible .nfc-chip { opacity: 1; transform: none; }
+.resv-visual.visible .resv-chip--ok { transition-delay: 0.5s; }
+.resv-visual.visible .resv-chip--panel { transition-delay: 0.75s; }
+
+@media (max-width: 1024px) {
+  #reservaciones { padding: 5rem 2rem; }
+  .resv-layout { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  .resv-visual { order: -1; max-width: 560px; width: 100%; justify-self: center; }
+}
+@media (max-width: 768px) {
+  #reservaciones { padding: 4.5rem 1.5rem; }
+  .resv-phone { transform: rotate(2deg); }
+}
+@media (max-width: 480px) {
+  #reservaciones { padding: 4rem 1rem; }
+  .resv-phone { width: min(100%, 270px); }
+  .resv-chip--ok { top: 2%; right: -0.25rem; }
+  .resv-chip--panel { bottom: 2%; left: -0.25rem; }
+  .resv-visual .nfc-chip { padding: 0.55rem 0.75rem; }
+}
+
+/* =====================
    RESEÑAS NFC (producto)
 ===================== */
 #resenas-nfc { background: #0E1222; padding: 7rem 4rem; }
@@ -1402,7 +1499,7 @@ body { transition: background-color 1s var(--ease); }
 body[data-tone="alt"]  { background-color: var(--bg2); }
 body[data-tone="blue"] { background-color: var(--tone-blue); }
 body[data-tone="teal"] { background-color: var(--tone-teal); }
-.js :is(#servicios, #resenas-nfc, #menu-nfc, #combos, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
+.js :is(#servicios, #reservaciones, #resenas-nfc, #menu-nfc, #combos, #proceso, #nosotros, #contadores, #comparacion, #contacto) { background-color: transparent; }
 
 /* 2. Títulos de sección: se descubren de abajo hacia arriba como una cortina.
       Máscara (no clip-path): Chrome cuenta el clip-path del propio elemento en

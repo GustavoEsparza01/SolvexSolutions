@@ -42,6 +42,7 @@
   <a href="#inicio" class="logo" aria-label="Nubo Studio, ir al inicio"><span class="logo-mark" aria-hidden="true"><svg class="logo-chev logo-chev--open" viewBox="0 0 32 60"><polyline points="27,5 5,30 27,55"/></svg><span class="logo-word">NUBO</span><svg class="logo-chev logo-chev--close" viewBox="0 0 32 60"><polyline points="5,5 27,30 5,55"/></svg></span><span class="logo-sub" aria-hidden="true">STUDIO</span></a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#reservaciones">Reservas</a></li>
     <li><a href="#comparacion">¿Por qué digital?</a></li>
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
@@ -56,6 +57,7 @@
 <!-- MENÚ MÓVIL -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#servicios" onclick="closeMobileMenu()">Servicios</a>
+  <a href="#reservaciones" onclick="closeMobileMenu()">Reservaciones en línea</a>
   <a href="#comparacion" onclick="closeMobileMenu()">¿Por qué digital?</a>
   <a href="#proceso" onclick="closeMobileMenu()">Proceso</a>
   <a href="#nosotros" onclick="closeMobileMenu()">Nosotros</a>
@@ -247,6 +249,7 @@
         <span class="price-from">Desde</span>
         <span class="price-amount">$7,000 <span class="price-cur">MXN</span></span>
         <span class="price-time">Entrega en 3–4 semanas</span>
+        <a href="#reservaciones" class="service-demo">Ver demo en vivo</a>
         <a href="#contacto" class="service-cta" data-servicio="Sistema de agenda y citas" aria-label="Solicitar cotización: Sistema de Agenda y Citas">Solicitar cotización
           <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -254,6 +257,93 @@
     </article>
 
   </div>
+  </div>
+</section>
+
+<!-- =====================
+     RESERVACIONES EN LÍNEA (producto propio, demo en vivo)
+===================== -->
+<section id="reservaciones" data-tone="blue">
+  <div class="container resv-layout">
+
+    <div class="nfc-copy">
+      <div class="section-label reveal">Producto propio · Beta</div>
+      <h2 class="nfc-title reveal">Recibe reservas<br> mientras tú trabajas</h2>
+      <p class="nfc-lead reveal">Nuestro primer sistema de reservaciones en línea. Tus clientes eligen servicio, profesional y un horario que de verdad está libre, sin llamadas ni mensajes de ida y vuelta. Funciona en línea: tu negocio tiene su propia página de reservas sin instalar nada.</p>
+
+      <ul class="nfc-features reveal">
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span><strong>Reserva en minutos</strong>Servicio, profesional y horario disponible en pocos toques.</span>
+        </li>
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+          <span><strong>Citas en un solo lugar</strong>Tus clientes consultan, reprograman o cancelan desde su cuenta.</span>
+        </li>
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+          <span><strong>Panel para el dueño</strong>Agenda, clientes, servicios, horarios y reportes de tu negocio.</span>
+        </li>
+        <li>
+          <span class="nfc-f-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></span>
+          <span><strong>Agenda por profesional</strong>Cada integrante del equipo ve sus citas del día.</span>
+        </li>
+      </ul>
+
+      <div class="nfc-buy reveal">
+        <div class="nfc-tiers-head">
+          <span class="resv-live"><i aria-hidden="true"></i>Demo en vivo</span>
+          <span class="nfc-checks">
+            <span class="nfc-config">Celular y computadora</span>
+            <span class="nfc-config">Adaptable a tu giro</span>
+          </span>
+        </div>
+        <p class="resv-note">Pruébalo tal como lo verán tus clientes. Lo configuramos con tus servicios, tu equipo y tus horarios: barberías, salones, consultorios, spas, estudios y cualquier negocio que trabaje con citas.</p>
+        <div class="nfc-actions">
+          <a class="btn-primary" href="https://sistema-de-reservaciones-web.vercel.app/#probar" target="_blank" rel="noopener">Probar el sistema
+            <svg class="btn-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn-secondary" href="#contacto" data-servicio="Sistema de agenda y citas">Lo quiero para mi negocio</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mockup del flujo de reserva (decorativo; los textos reales están en la demo) -->
+    <div class="resv-visual reveal">
+      <div class="resv-phone" aria-hidden="true">
+        <div class="resv-screen">
+          <div class="resv-top">
+            <span class="resv-brand">Tu negocio <em>· Reservas</em></span>
+            <span class="resv-avatar"></span>
+          </div>
+          <span class="resv-step">Paso 3 de 4</span>
+          <span class="resv-h">Elige tu horario</span>
+          <div class="resv-picked"><span>Corte clásico</span><span>45 min</span></div>
+          <div class="resv-days">
+            <span><small>Lun</small>12</span>
+            <span class="is-on"><small>Mar</small>13</span>
+            <span><small>Mié</small>14</span>
+            <span><small>Jue</small>15</span>
+            <span><small>Vie</small>16</span>
+          </div>
+          <div class="resv-slots">
+            <span class="is-off">10:00</span><span>10:45</span><span class="is-on">11:30</span>
+            <span class="is-off">12:15</span><span>13:00</span><span>16:00</span>
+            <span>16:45</span><span class="is-off">17:30</span><span>18:15</span>
+          </div>
+          <span class="resv-btn">Confirmar cita</span>
+        </div>
+      </div>
+      <div class="nfc-chip resv-chip--ok" aria-hidden="true">
+        <span class="nfc-chip-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span><strong>¡Cita confirmada!</strong><small>Mar 13 · 11:30</small></span>
+      </div>
+      <div class="nfc-chip resv-chip--panel" aria-hidden="true">
+        <span class="nfc-chip-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span><strong>Panel del dueño</strong><small>Agenda, clientes y reportes</small></span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -884,6 +974,7 @@
       <a href="#inicio" class="logo" aria-label="Nubo Studio, ir al inicio"><span class="logo-mark" aria-hidden="true"><svg class="logo-chev logo-chev--open" viewBox="0 0 32 60"><polyline points="27,5 5,30 27,55"/></svg><span class="logo-word">NUBO</span><svg class="logo-chev logo-chev--close" viewBox="0 0 32 60"><polyline points="5,5 27,30 5,55"/></svg></span><span class="logo-sub" aria-hidden="true">STUDIO</span></a>
       <ul class="footer-links">
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#reservaciones">Reservaciones</a></li>
         <li><a href="#proceso">Proceso</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
