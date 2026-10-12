@@ -19,7 +19,9 @@
 // Marca que hay JS: el CSS oculta lo que aparece con el scroll solo si hay script
 document.documentElement.classList.add('js');
 
-const WHATSAPP = '527831054451';
+// Número de WhatsApp: oculto mientras el sitio está en fase de prueba. Para reactivar el enlace
+// "continuar por WhatsApp" del formulario, pon aquí el número (52 + 10 dígitos) y vuelve a agregar #waForm.
+const WHATSAPP = '';
 
 document.addEventListener('DOMContentLoaded', () => {
 
